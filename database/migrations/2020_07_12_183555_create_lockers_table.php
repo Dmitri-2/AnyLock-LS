@@ -16,7 +16,7 @@ class CreateLockersTable extends Migration
         Schema::create('lockers', function (Blueprint $table) {
             $table->id();
             $table->integer('locker_num');
-            $table->enum('status', ['available', 'pending', 'broken', 'expiring', 'expired']);
+            $table->enum('status', ['available', 'rented', 'pending', 'broken', 'expiring', 'expired']);
             $table->foreignId('location_id')->constrained('location');
             $table->timestamps();
         });
