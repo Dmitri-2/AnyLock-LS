@@ -17,7 +17,7 @@ class CreateLockersTable extends Migration
             $table->id();
             $table->integer('locker_num');
             $table->enum('status', ['available', 'rented', 'pending', 'broken', 'expiring', 'expired']);
-            $table->foreignId('location_id')->constrained('location');
+            $table->foreignId('location_id')->constrained('locations');
             $table->timestamps();
         });
     }
