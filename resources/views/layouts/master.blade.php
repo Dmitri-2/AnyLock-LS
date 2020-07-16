@@ -24,69 +24,105 @@
     {{--Bootstrap--}}
     <link rel="stylesheet" href="{{ URL::asset('/css/bootstrap.min.css') }}">
 
+    <style>
+        html, body, .app{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        .sidebar, .content {
+            height: 100%;
+            overflow:auto;
+            float:left;
+        }
+
+        .sidebar {
+            background:white;
+            width: 15%;
+        }
+
+        .content {
+            width: 85%;
+        }
+
+        /*.nav-item:hover {*/
+            /*padding: 10px;*/
+        /*}*/
+
+        /*
+         Sidebar design and styling is based on the following guides, with minor code excerpts used from them:
+            https://bootstrapious.com/p/bootstrap-sidebar
+            https://medium.com/@davidmellul/make-a-sidebar-for-your-website-the-easy-way-html5-css3-vanillajs-eccbb4d0cff6
+        */
+
+    </style>
+
 </head>
 <body>
-<div id="app">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="/">AnyLock</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                        </li>
+<div class="app">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <a class="navbar-brand" href="/">AnyLock Locker System </a>
+            <ul class="navbar-nav ml-auto">
+                <!-- Authentication Links -->
+                @guest
+                    <li class="nav-item">
+                        <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "login") active @endif" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    </li>
+                    @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
+                            <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "register") active @endif" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Rent</a>
-                        </li>
-                    </ul>
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "login") active @endif" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "register") active @endif" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                            @else
+                    @endif
+                    @else
 
-                                <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link pb-md-0 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ Auth::user()->name }} <span class="caret"></span>
-                                    </a>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link pb-md-0 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
 
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a class ="dropdown-item" href="#">
-                                            Account
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class ="dropdown-item" href="#">
+                                    Account
 
-                                        </a>
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                           onclick="event.preventDefault();
+                                </a>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </li>
-                            @endguest
-                    </ul>
-                </div>
-            </nav>
+                                    Logout
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                        @endguest
+            </ul>
+    </nav>
+        <nav class="sidebar border-right">
+            <div class="" id="">
+                <ul class="list-unstyled" >
+                    <li class="nav-item">
+                        <a class="d-block p-3 bg-light text-dark text-decoration-none" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item border-top">
+                        <a class="d-block p-3 bg-light text-dark text-decoration-none" href="#">About</a>
+                    </li>
+                    <li class="nav-item border-top border-bottom">
+                        <a class="d-block p-3 bg-light text-dark text-decoration-none" href="#">Rent</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
-    <main class="py-4">
-        @include('layouts.alerts')
-        @yield('body')
-    </main>
+        <main class="content mt-4">
+            @include('layouts.alerts')
+            @yield('body')
+        </main>
+    </div>
+
+
+
 </div>
 
 <script src="{{ URL::asset('/libraries/jquery-3.4.1.slim.min.js') }}"></script>
