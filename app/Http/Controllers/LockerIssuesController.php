@@ -11,6 +11,7 @@ class LockerIssuesController extends Controller
      *
      * @return void
      */
+    //TODO: Uncomment this so that you have to log in to view the page
     // public function __construct()
     // {
     //     $this->middleware('auth');
