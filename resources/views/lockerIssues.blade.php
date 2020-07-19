@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <h1>Locker Issues</h1>
+                <h1>Locker Report</h1>
                 <table class="table">
                 <thead class="thead-dark">
                     <tr>
