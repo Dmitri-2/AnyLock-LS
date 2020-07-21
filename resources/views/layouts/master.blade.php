@@ -8,9 +8,9 @@
     <title>{{ config('app.name', 'Water Reuse Directory') }}</title>
 
     <!-- Scripts - for any compiled site-wide JS -->
-    {{--    <script src="{{ asset('js/app.js') }}" defer></script>--}}
+{{--    <script src="{{ asset('js/app.js') }}" defer></script>--}}
 
-    <!-- Fonts -->
+<!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="{{ URL::asset('/css/bootstrap.min.css') }}">
 
     <style>
-        html, body, .app{
+        html, body, .app {
             width: 100%;
             height: 100%;
             margin: 0;
@@ -33,12 +33,12 @@
 
         .sidebar, .content {
             height: 100%;
-            overflow:auto;
-            float:left;
+            overflow: auto;
+            float: left;
         }
 
         .sidebar {
-            background:white;
+            background: white;
             width: 15%;
         }
 
@@ -47,7 +47,7 @@
         }
 
         /*.nav-item:hover {*/
-            /*padding: 10px;*/
+        /*padding: 10px;*/
         /*}*/
 
         /*
@@ -63,64 +63,72 @@
 <div class="app">
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
         <a class="navbar-brand" href="/">AnyLock Locker System </a>
-            <ul class="navbar-nav ml-auto">
-                <!-- Authentication Links -->
-                @guest
+        <ul class="navbar-nav ml-auto">
+            <!-- Authentication Links -->
+            @guest
+                <li class="nav-item">
+                    <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "login") active @endif"
+                       href="{{ route('login') }}">{{ __('Login') }}</a>
+                </li>
+                @if (Route::has('register'))
                     <li class="nav-item">
-                        <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "login") active @endif" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "register") active @endif"
+                           href="{{ route('register') }}">{{ __('Register') }}</a>
                     </li>
-                    @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "register") active @endif" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                    @endif
-                    @else
+                @endif
+            @else
 
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link pb-md-0 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link pb-md-0 dropdown-toggle" href="#" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->name }} <span class="caret"></span>
+                    </a>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class ="dropdown-item" href="#">
-                                    Account
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">
+                            Account
 
-                                </a>
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
+                        </a>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    Logout
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                        @endguest
-            </ul>
+                            Logout
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
+            @endguest
+        </ul>
     </nav>
-        <nav class="sidebar border-right">
-            <div class="" id="">
-                <ul class="list-unstyled" >
-                    <li class="nav-item">
-                        <a class="d-block p-3 bg-light text-dark text-decoration-none" href="/">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item border-top">
-                        <a class="d-block p-3 bg-light text-dark text-decoration-none" href="#">About</a>
-                    </li>
+    <nav class="sidebar border-right">
+        <div class="" id="">
+            <ul class="list-unstyled">
+                <li class="nav-item">
+                    <a class="d-block p-3 bg-light text-dark text-decoration-none" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item border-top">
+                    <a class="d-block p-3 bg-light text-dark text-decoration-none" href="#">About</a>
+                </li>
+                <li class="nav-item border-top border-bottom">
+                    <a class="d-block p-3 bg-light text-dark text-decoration-none" href="#">Rent</a>
+                </li>
+                @if(Auth::check() && Auth::user()->is_admin)
                     <li class="nav-item border-top border-bottom">
-                        <a class="d-block p-3 bg-light text-dark text-decoration-none" href="#">Rent</a>
+                        <a class="d-block p-3 bg-light text-dark text-decoration-none" href={{route("expiry_list")}}>Expiry
+                            List</a>
                     </li>
-                </ul>
-            </div>
-        </nav>
+                @endif
+            </ul>
+        </div>
+    </nav>
 
-        <main class="content mt-4">
-            @include('layouts.alerts')
-            @yield('body')
-        </main>
-    </div>
-
+    <main class="content mt-4">
+        @include('layouts.alerts')
+        @yield('body')
+    </main>
+</div>
 
 
 </div>
