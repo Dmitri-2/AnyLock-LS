@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Service\AdminService;
 
 class LockerIssuesController extends Controller
 {
@@ -22,8 +23,13 @@ class LockerIssuesController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-        return view('lockerIssues');
+    public function location_list(){
+        // $user = Auth::user();
+        // $userId = $user->id;
+
+        $locations = AdminService::get_locations();
+        $lockers = AdminService::get_lockers();
+
+        return view('admin.lockerIssues', compact('locations', 'lockers'));
     }
 }
