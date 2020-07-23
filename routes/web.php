@@ -20,3 +20,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/rent', 'RentController@index')->name('rent');
+
+Route::post('/rent-attempt', 'RentController@tryRent')->name('tryRent');

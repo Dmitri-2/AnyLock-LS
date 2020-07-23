@@ -24,6 +24,9 @@
     {{--Bootstrap--}}
     <link rel="stylesheet" href="{{ URL::asset('/css/bootstrap.min.css') }}">
 
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
     <style>
         html, body, .app{
             width: 100%;

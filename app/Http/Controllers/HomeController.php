@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Service\LockerRentalService;
+use App\User;
+    
 
 class HomeController extends Controller
 {
@@ -23,6 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        LockerRentalService::rentLocker();
+        
         return view('home');
     }
 }
