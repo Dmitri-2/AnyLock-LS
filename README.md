@@ -38,7 +38,7 @@ If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Lar
 
 ## Contributing
 
-Please contact Recode [here](https://www.recodenow.org/contact-us/) if you would like to contribute to this project.
+
 
 ## License
 
