@@ -25,7 +25,7 @@ class RentController extends Controller
         $location = Location::where('name', $request->location)->get()->first();
         $locker = Locker::where('id', $request->id)->get()->first();
         if($location && $locker){
-            if($location->is_available == true && $locker->status == "available"){
+            if($location->is_available == true && $locker->status == 'available'){
                 $rental = new LockerRental();
                 $rental->user_id = $user->id;
                 $rental->locker_id = $locker->id;
@@ -34,5 +34,9 @@ class RentController extends Controller
             }
         }
         return redirect()->route('rent')->with(['alert' => 'danger', 'alertMessage' => 'Locker #' . $request->number . ' at: ' . $request->location . ' was not availble. Please try again or try a different locker.']);
+    }
+
+    public function getLocationsLockers (Request $request){
+        return Location::where('id', $request->id)->get()->first()->getLockers();
     }
 }

@@ -19,6 +19,11 @@
             for(var i = 0; i < locations.length; i++){
                 $("#location").append("<option>"+locations[i]+"</option>");
             }
+
+            for(var i = 1; i < 3; i++){
+                $('#duration').append("<option>"+plusMonth(i)+"</option>");
+            }
+
     
             $("#location").on("change", function(){
                 changeLocation($("#location").find("option").index($("#location").find("option:selected")) -1);
@@ -34,7 +39,16 @@
             });
         });
 
+        function plusMonth(num){
+            var date = new Date();
+            if(num > 0){
+                var dateM = new Date(date.setMonth(date.getMonth()+num));
+                return dateM.toString();
+            }
 
+            return 0;
+        }
+        
         function changeLocation(num){
             if (num < shapes.length && num > -1)
                 curLocation = num;
@@ -115,14 +129,16 @@
                                 <div class="form-group col-md-4">
                                     <label for="duration">Rental Duration</label>
                                     <select id="duration" name="duration" class="form-control">
-                                        <option selected>1 month</option>
-                                        <option>2 months</option>
+                                        <option selected disabled="">Please Select</option>
                                     </select>
                                 </div>
                                 <input type="submit" class="btn btn-primary" value="Submit">
                             </form>
                         </p>
                     </div>
+                    <form action="{{ route('getLockers') }}" method="GET">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                    </form>
                 </div>
             </div>
         </div>

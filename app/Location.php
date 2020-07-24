@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Locker;
 
 class Location extends Model
 {
@@ -14,4 +15,9 @@ class Location extends Model
     protected $fillable = [
         'id', 'name', 'is_available', 'numrows', 'height', 'width', 'depth', 'dept'
     ];
+
+    public function getLockers(){
+    	return Locker::where('location_id', $this->id)->get();
+    	//return $this->hasMany('App\Locker', 'location_id', 'id');
+    }
 }
