@@ -7,7 +7,7 @@
         <div class="col-md-8">
             <h1>Locker Report</h1>
             <select id="locationSelect" class="form-control" name="location">
-                    option value="-1">Choose...</option>
+                    <option value="-1">Choose...</option>
                 @foreach($locations as $location)
                     <option value="{{$location->id}}">{{$location->name}}</option>
                 @endforeach
@@ -19,29 +19,11 @@
                          <tr>
                             <th scope="col">Locker Number</th>
                             <th scope="col">Locker Status</th>
-                            <th scope="col">Disable / Enable</th>
+                            <th scope="col">Set Broken / Fixed</th>
                         </tr>
                     </thead>
                     <tbody id="tbody">
-                    @foreach($lockers as $locker)
-                    <!-- You need to make this work for lockers dynamically. This is just a test to get it to work.
-                         If the locker needs to be disabled or enabled, check on the backend if it already enabled
-                        or disabled, because you are loading all of the info at the beggining, and multiple people may
-                        be trying to disable or enable lockers. -->
-                    <tr><td> {{$locker->locker_num}}</td><td>{{$locker->status}}</td><td>
-                        <form method="POST">
-                            {{ csrf_field() }}
-                            @if($locker->status != 'broken')
-                            <input id="disable" name="disable" value="disable" hidden>
-                            <input id="{{$locker->id}}" name="locker_id" value="{{$locker->id}}" hidden>
-                            <button type="submit" class="btn btn-danger">Disable</button>
-                            @else
-                            <input id="enable" name="enable" value="enable" hidden>
-                            <input id="{{$locker->id}}" name="locker_id" value="{{$locker->id}}" hidden>
-                            <button type="submit" class="btn btn-primary">Enable</button>
-                            @endif
-                        </form>
-                    @endforeach
+
                     </tbody>
                 </table>
             </div>
@@ -64,9 +46,9 @@
 <script>
 
     $('.form-control').change(function(){
-        $locationId = $(this).val()
+        $locationId = $(this).val();
         $('tr').remove();
-        $('.thead-dark').append('<tr><th scope="col">Location</th><th scope="col">Locker Number</th><th scope="col">Locker Status</th><th scope="col">Disable / Enable</th></tr>');
+        $('.thead-dark').append('<tr><th scope="col">Locker Number</th><th scope="col">Locker Status</th><th scope="col">Set Broken / Fixed</th></tr>');
         @foreach($lockers as $locker)
         $lockerLocId = {{$locker->location_id}};
 
@@ -89,7 +71,15 @@
                 $lockerStat = 'NA';
                 @endif
 
-                $('#tbody').append('<tr><td>' + {{$locker->locker_num}} + '</td><td>' + $lockerStat + '</td><td><button id="' + {{$locker->id}} + '" type="button" class="btn btn-primary" onclick="changeStatus(' + {{$locker->id}} +')">Enabled</button></td></tr>');
+                $('#tbody').append('<tr><td>' + {{$locker->locker_num}} + '</td><td>' + $lockerStat + '</td><td> <form method="POST" action="{{ route('updateBrokenStatus') }}">' +
+                            '{{ csrf_field() }} @if($locker->status != "broken")' +
+                            '<input id="broken" name="broken" value="broken" hidden>' +
+                            '<input id="{{$locker->id}}" name="locker_id" value="{{$locker->id}}" hidden>' +
+                            '<button type="submit" class="btn btn-danger">Broken</button> @else' +
+                            '<input id="fixed" name="fixed" value="fixed" hidden>' +
+                            '<input id="{{$locker->id}}" name="locker_id" value="{{$locker->id}}" hidden>' +
+                            '<button type="submit" class="btn btn-primary">Fixed</button> @endif' +
+                        '</form>');
             }
         @endforeach
     });

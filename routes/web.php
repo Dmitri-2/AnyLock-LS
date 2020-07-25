@@ -24,3 +24,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Admin routes
 //TODO: need to change once we have an admin role in code
 Route::get('/lockerIssues', 'LockerIssuesController@location_list')->name('lockerIssues');
+Route::post('/lockerIssues/update', 'LockerIssuesController@update_status')->name('updateBrokenStatus');
