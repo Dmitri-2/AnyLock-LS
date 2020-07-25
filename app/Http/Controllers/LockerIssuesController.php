@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Service\AdminService;
 use App\Http\Service\DatabaseHelper;
 use Route;
+Use Auth;
 
 class LockerIssuesController extends Controller
 {
@@ -15,10 +16,10 @@ class LockerIssuesController extends Controller
      * @return void
      */
     //TODO: Uncomment this so that you have to log in to view the page
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     /**
      * Show the application dashboard.
@@ -26,9 +27,6 @@ class LockerIssuesController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function location_list(){
-        // $user = Auth::user();
-        // $userId = $user->id;
-
         $locations = AdminService::get_locations();
         $lockers = AdminService::get_lockers();
 
@@ -42,11 +40,6 @@ class LockerIssuesController extends Controller
 
         $status = "";
 
-        // if(($submission->user_id !== Auth::user()->id) && Auth::user()->is_admin === false){
-        //     return redirect()->back()->with(['alert' => 'danger', 'alertMessage' => "Please don't try to delete other people's submissions!"]);
-        // }
-
-        // DatabaseHelper::deleteItem($request->state, $submission);
         if($request->broken)
         {
             $status = "broken";
