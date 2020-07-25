@@ -56,17 +56,17 @@
             {
                 $lockerNum = {{$locker->locker_num}};
                 @if($locker->status === 'available')
-                $lockerStat = 'available';
+                $lockerStat = 'Available';
                 @elseif($locker->status === 'rented')
-                $lockerStat = 'rented';
+                $lockerStat = 'Rented';
                 @elseif($locker->status === 'pending')
-                $lockerStat = 'pending';
+                $lockerStat = 'Pending';
                 @elseif($locker->status === 'broken')
-                $lockerStat = 'broken';
+                $lockerStat = 'Broken';
                 @elseif($locker->status === 'expiring')
-                $lockerStat = 'expiring';
+                $lockerStat = 'Expiring';
                 @elseif($locker->status === 'expired')
-                $lockerStat = 'expired';
+                $lockerStat = 'Expired';
                 @else
                 $lockerStat = 'NA';
                 @endif
