@@ -21,6 +21,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+//User
+Route::get('/userStatus', 'UserController@status')->name('userStatus');
+
 //Admin routes
 //TODO: need to change once we have an admin role in code
 Route::get('/lockerIssues', 'LockerIssuesController@location_list')->name('lockerIssues');

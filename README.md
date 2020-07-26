@@ -1,4 +1,4 @@
-# AnyLock-LS Locker Managment System
+# AnyLock Locker Managment System
 
 ## About This Project
  
