@@ -1,4 +1,14 @@
 # How to Contribute to AnyLock Locker System (LS)
+
+## Jump to 
+
+[Issues](#issues)
+
+[Features & Changes](#features-or-changes)
+
+[Coding Conventions](#coding-conventions)
+
+
 ## Issues
 If you happen to find find any bugs/issues go to the [issues](https://github.com/Dmitri-2/AnyLock-LS/issues) tab of this repo and submit a detailed description of the bug/issue. 
 
@@ -10,8 +20,14 @@ If you happen to find find any bugs/issues go to the [issues](https://github.com
 * **Descibe the expected behaviour.** What is supposed to happen? 
 * **If the problem wasn't triggered by a specific action,** describe what you were doing before the problem happened and share more information about that.
 
-## Features/Changes
-Submit a pull request via the [Pull Requests](https://github.com/Dmitri-2/AnyLock-LS/pulls) of this repo. Screenshots/Screenrecordings would be very welcome to be attached along with these. Please follow our [coding conventions](#coding-conventions) (below) and keep the feature limited to one commit. Write a clear commit message that includes a detailed description of the changes and the impact on the code. Please follow the coding conventions by reading and matching the conventions used in the code. 
+## Features or Changes
+Submit a pull request via the [Pull Requests](https://github.com/Dmitri-2/AnyLock-LS/pulls) of this repo. 
+
+#### Guidelines: 
+* **Provide screenshots/Screenrecordings** that demonstrate the feature/change
+* **Follow our [coding conventions](#coding-conventions)** (below) / Read and match the conventions used in our code.
+* **Keep the feature limited to one commit** Keep it clean! 
+* **Write a clear commit message** includes a detailed description of the changes and the impact on the code.
 
 #### A detailed description of a feature/change: 
 * **Use a clear and descriptive title** for the suggestion. 
@@ -20,5 +36,9 @@ Submit a pull request via the [Pull Requests](https://github.com/Dmitri-2/AnyLoc
 * **Explain why** this feature/change is useful for AnyLock. 
 
 #### Coding Conventions:
+* **4 spaces for tabs** 
+* **Classes and route names** are camelCased e.g. *class UserService*
+* **Variables and Functions** use an underscore e.g. *$rented_locker;*
+* **Keep the code flow the same** Web routes go into *routes/web.php*, The controllers (*app/Http/Controllers*) route that to a function in a service file *app/Http/Service* where the method is actually implemented. 
 
 ## Thank you for considering to contribute to the AnyLock Locker System!
