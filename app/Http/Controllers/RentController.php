@@ -34,7 +34,7 @@ class RentController extends Controller
                 $rental->locker_id = $locker->id;
                 $rental->end_date = Carbon::parse($request->duration, 'PST');
 
-                $locker->status = "rented";
+                $locker->status = "pending";
                 $locker->save();
 
                 $rental->save();

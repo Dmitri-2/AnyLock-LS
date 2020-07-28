@@ -20,13 +20,10 @@ Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/rent', 'RentController@index')->name('rent');
 
-Route::post('/rent-attempt', 'RentController@tryRent')->name('tryRent');
-
-
-
 //User protected routes (must be logged in)
 Route::middleware('auth')->group(function () {
     Route::get('/userStatus', 'UserController@status')->name('userStatus');
+	Route::post('/rent-attempt', 'RentController@tryRent')->name('tryRent');
 });
 
 //Admin routes
