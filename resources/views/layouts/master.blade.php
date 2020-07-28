@@ -114,17 +114,29 @@
                     <li class="nav-item border-top border-bottom">
                         <a class="d-block p-3 bg-light text-dark text-decoration-none" href={{route('userStatus')}}>Status</a>
                     </li>
-                    @if(Auth::check() && Auth::user()->is_admin)
+                </ul>
+            </div>
+            <h5 class="text-center mt-4"> Admin Tools </h5>
+                <div class="" id="">
+                    <ul class="list-unstyled" >
+                        <li class="nav-item border-top border-bottom">
+                            <a class="d-block p-3 bg-light text-dark text-decoration-none" href={{route('adminDashboard')}}>Dashboard</a>
+                        </li>
+                        <li class="nav-item border-top border-bottom">
+                            <a class="d-block p-3 bg-light text-dark text-decoration-none" href={{route('allRentals')}}>All Rentals</a>
+                        </li>
+                        <li class="nav-item border-top border-bottom">
+                            <a class="d-block p-3 bg-light text-dark text-decoration-none" href={{route('pendingRentals')}}>Pending Rentals</a>
+                        </li>
+                        <li class="nav-item border-top border-bottom">
+                            <a class="d-block p-3 bg-light text-dark text-decoration-none" href={{route('lockerIssues')}}>Locker Issues</a>
+                        </li>
                         <li class="nav-item border-top border-bottom">
                             <a class="d-block p-3 bg-light text-dark text-decoration-none" href={{route("expiry_list")}}>Expiry
                                 List</a>
                         </li>
-                        <li class="nav-item border-top border-bottom">
-                            <a class="d-block p-3 bg-light text-dark text-decoration-none" href="/lockerIssues">Locker Issues</a>
-                        </li>
-                    @endif
-                </ul>
-            </div>
+                    </ul>
+                </div>
         </nav>
 
         <main class="content mt-4">
