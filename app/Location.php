@@ -17,7 +17,6 @@ class Location extends Model
     ];
 
     public function getLockers(){
-    	return Locker::where('location_id', $this->id)->get();
-    	//return $this->hasMany('App\Locker', 'location_id', 'id');
+    	return Locker::where('location_id', $this->id)->orderBy('locker_num')->get();
     }
 }

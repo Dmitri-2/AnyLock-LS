@@ -46,7 +46,7 @@
             var date = new Date();
             if(num > 0){
                 var dateM = new Date(date.setMonth(date.getMonth()+num));
-                return dateM.toString();
+                return dateM.toLocaleString("en-US");
             }
 
             return 0;

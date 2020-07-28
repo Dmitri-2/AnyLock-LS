@@ -8,6 +8,8 @@ use App\User;
 use App\Locker;
 use App\Location;
 use App\LockerRental;
+use Carbon\Carbon;
+use DateTime;
 use Auth;
 
 class RentController extends Controller
@@ -30,11 +32,16 @@ class RentController extends Controller
                 $rental = new LockerRental();
                 $rental->user_id = $user->id;
                 $rental->locker_id = $locker->id;
-                $rendal->end_date = $request->duration;
-                return redirect()->route('home')->with(['alert' => 'success', 'alertMessage' => 'Locker #' . $request->number . ' at: ' . $request->location . ' has been reserved for ' . $request->duration . ' term(s).']);
+                $rental->end_date = Carbon::parse($request->duration, 'PST');
+
+                $locker->status = "rented";
+                $locker->save();
+
+                $rental->save();
+                return redirect()->route('home')->with(['alert' => 'success', 'alertMessage' => 'Locker id#' . $request->id . ' at: ' . $request->location . ' has been reserved for ' . $request->duration . ' term(s).']);
             }
         }
-        return redirect()->route('rent')->with(['alert' => 'danger', 'alertMessage' => 'Locker #' . $request->number . ' at: ' . $request->location . ' was not availble. Please try again or try a different locker.']);
+        return redirect()->route('rent')->with(['alert' => 'danger', 'alertMessage' => 'Locker id#' . $request->id . ' at: ' . $request->location . ' was not availble. Please try again or try a different locker.']);
     }
 
     public function getLocationsLockers (Request $request){
