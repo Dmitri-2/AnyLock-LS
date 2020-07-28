@@ -49,7 +49,7 @@
         $locationId = $(this).val();
         $('tr').remove();
         $('.thead-dark').append('<tr><th scope="col">Locker Number</th><th scope="col">Locker Status</th><th scope="col">Set Broken / Fixed</th></tr>');
-        @foreach($lockers as $locker)
+        @foreach($lockers->sortBy('locker_num') as $locker)
         $lockerLocId = {{$locker->location_id}};
 
             if($locationId == $lockerLocId)
