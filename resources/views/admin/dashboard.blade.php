@@ -4,24 +4,29 @@
 @section('body')
 
     <div class="container">
-        <h2> Admin Dashboard </h2>
+        <h2 class="text-center mb-3"> Admin Dashboard </h2>
         <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">Total Locker Rentals </div>
+            <div class="col-md-4">
+                <div class="card p-3 border shadow text-center">
 
                     <div class="card-body">
-                        <h2>There are {{$lockerRentalCount}} locker rentals...</h2>
+                        <h2>Locker Rentals: {{$lockerRentalCount}} </h2>
 
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">Total Users </div>
-
+            <div class="col-md-4">
+                <div class="card p-3 border shadow text-center">
                     <div class="card-body">
-                        <h2>There are {{$userCount}} users registered...</h2>
+                        <h2>User Count: {{$userCount}}</h2>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-3 border shadow text-center">
+                    <div class="card-body">
+                        <h2>Locker Count: {{$lockerCount}}</h2>
 
                     </div>
                 </div>
