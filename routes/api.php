@@ -18,4 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/lockersOnLocation', 'RentController@getLocationsLockers')->name('getLockers');
+Route::get('/lockersOnLocation/{location?}', 'RentController@getLocationsLockers')->name('getLockersLocation');

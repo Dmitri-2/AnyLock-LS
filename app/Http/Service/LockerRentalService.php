@@ -21,7 +21,11 @@ class LockerRentalService
     }
 
     public static function getLocationNames(){
-    	$array = array("First corridor just north of CS tutor center", "Other CAT place", "Nerd Room");
+    	$array = array();
+        $lockers = Locker::all();
+        foreach ($lockers as $key => $value) {
+            array_push($array, $key->name);
+        }
     	return $array;
     }
 }

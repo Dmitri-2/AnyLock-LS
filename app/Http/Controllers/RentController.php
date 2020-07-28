@@ -37,6 +37,6 @@ class RentController extends Controller
     }
 
     public function getLocationsLockers (Request $request){
-        return Location::where('id', $request->id)->get()->first()->getLockers();
+        return Location::where('name', $request->location)->get()->first()->getLockers();
     }
 }

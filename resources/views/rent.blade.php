@@ -26,14 +26,16 @@
 
     
             $("#location").on("change", function(){
+
                 changeLocation($("#location").find("option").index($("#location").find("option:selected")) -1);
-                var lockerNum = 1;
+                var lockerCount = 0;
+                var lockerNum = getLockersFromLocation();
                 $(".Lockers").html("");
                 for(var i = 0; i < shapes[curLocation].length; i++){
                     $(".Lockers").append("<div id='locker-col"+i+"' class='col'></div>")
                     for(var j = 0; j < shapes[curLocation][i]; j++){
-                        $("#locker-col"+i).append("<label class='locker'><input type='radio' name='id' class='radio-locker' value='"+lockerNum+"'><span>"+lockerNum+"</span></label><br>");
-                        lockerNum++;
+                        $("#locker-col"+i).append("<label class='locker'><input type='radio' name='id' class='radio-locker' value='"+lockerCount+"'><span>"+lockerCount+"</span></label><br>");
+                        lockerCount++;
                     }
                 }
             });
@@ -52,6 +54,12 @@
         function changeLocation(num){
             if (num < shapes.length && num > -1)
                 curLocation = num;
+        }
+
+        async function getLockersFromLocation(){
+            var data = await axios.get("{{route("getLockersLocation")}}" + "/" + curLocation);
+            console.log(data);
+            retrun data;
         }
     </script>
 
