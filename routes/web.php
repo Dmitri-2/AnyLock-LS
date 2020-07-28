@@ -13,21 +13,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-
+//Unprotected routes
 Auth::routes();
 
+Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-//User
-Route::get('/userStatus', 'UserController@status')->name('userStatus');
+//User protected routes (must be logged in)
+Route::middleware('auth')->group(function () {
+    Route::get('/userStatus', 'UserController@status')->name('userStatus');
+});
 
 //Admin routes
-Route::prefix('admin')->group(function () {
-//TODO: need to change once we have an admin role in code
+Route::prefix('admin')->middleware('auth')->group(function () {
+    //TODO: need to change once we have an admin role in code
     Route::get('/dashboard', 'AdminController@viewAdminDashboard')->name('adminDashboard');
 
     Route::get('/lockerIssues', 'LockerIssuesController@location_list')->name('lockerIssues');

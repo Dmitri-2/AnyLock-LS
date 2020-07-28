@@ -129,7 +129,7 @@
                             <a class="d-block p-3 bg-light text-dark text-decoration-none" href={{route('pendingRentals')}}>Pending Rentals</a>
                         </li>
                         <li class="nav-item border-top border-bottom">
-                            <a class="d-block p-3 bg-light text-dark text-decoration-none" href="/lockerIssues">Locker Issues</a>
+                            <a class="d-block p-3 bg-light text-dark text-decoration-none" href={{route('lockerIssues')}}>Locker Issues</a>
                         </li>
                     </ul>
                 </div>
