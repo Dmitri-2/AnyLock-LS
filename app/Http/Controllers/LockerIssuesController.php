@@ -57,4 +57,11 @@ class LockerIssuesController extends Controller
 
         return redirect()->back()->with(['alert' => 'danger', 'alertMessage' => "The locker status did not update. Please try again."]);
     }
+
+    public function expiry_list() {
+        $expired = AdminService::get_expiry_list('expired');
+        $expiring = AdminService::get_expiry_list('expiring');
+        return view('admin.expiry', compact('expired', 'expiring'));
+    }
+
 }

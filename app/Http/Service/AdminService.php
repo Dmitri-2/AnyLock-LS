@@ -49,4 +49,6 @@ class AdminService
         $lockers = Locker::all();
         return $lockers;
     }
+
+
 }
