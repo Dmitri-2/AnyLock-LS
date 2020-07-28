@@ -2,7 +2,7 @@
 @extends("layouts.master")
 
 @section('body')
-
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript">
         // Globals
         var curLocation = 0;
@@ -28,16 +28,17 @@
             $("#location").on("change", function(){
 
                 changeLocation($("#location").find("option").index($("#location").find("option:selected")) -1);
-                var lockerCount = 0;
-                var lockerNum = getLockersFromLocation();
-                $(".Lockers").html("");
-                for(var i = 0; i < shapes[curLocation].length; i++){
-                    $(".Lockers").append("<div id='locker-col"+i+"' class='col'></div>")
-                    for(var j = 0; j < shapes[curLocation][i]; j++){
-                        $("#locker-col"+i).append("<label class='locker'><input type='radio' name='id' class='radio-locker' value='"+lockerCount+"'><span>"+lockerCount+"</span></label><br>");
-                        lockerCount++;
+                getLockersFromLocation().then(data =>{
+                    var lockerCount = 0;
+                    $(".Lockers").html("");
+                    for(var i = 0; i < shapes[curLocation].length; i++){
+                        $(".Lockers").append("<div id='locker-col"+i+"' class='col'></div>")
+                        for(var j = 0; j < shapes[curLocation][i] && lockerCount < data.length; j++){
+                            $("#locker-col"+i).append("<label class='locker'><input type='radio' name='id' class='radio-locker' value='"+data[lockerCount]["id"]+"'><span>"+data[lockerCount]["locker_num"]+": "+data[lockerCount]["status"]+"</span></label><br>");
+                            lockerCount++;
+                        }
                     }
-                }
+                });   
             });
         });
 
@@ -57,9 +58,10 @@
         }
 
         async function getLockersFromLocation(){
-            var data = await axios.get("{{route("getLockersLocation")}}" + "/" + curLocation);
+            var data = await axios.get("{{route("getLockersLocation")}}" + "/" + locations[curLocation]);
             console.log(data);
-            retrun data;
+            console.log(data["data"]);
+            return data["data"];
         }
     </script>
 
@@ -144,9 +146,6 @@
                             </form>
                         </p>
                     </div>
-                    <form action="{{ route('getLockers') }}" method="GET">
-                        <input type="submit" class="btn btn-primary" value="Submit">
-                    </form>
                 </div>
             </div>
         </div>

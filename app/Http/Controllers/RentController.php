@@ -7,6 +7,7 @@ use App\Http\Service\LockerRentalService;
 use App\User;
 use App\Locker;
 use App\Location;
+use App\LockerRental;
 use Auth;
 
 class RentController extends Controller
@@ -37,6 +38,7 @@ class RentController extends Controller
     }
 
     public function getLocationsLockers (Request $request){
-        return Location::where('name', $request->location)->get()->first()->getLockers();
+        $locations = Location::where('name', $request->location)->get()->first()->getLockers();
+        return response()->json($locations);
     }
 }
