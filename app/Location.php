@@ -12,6 +12,6 @@ class Location extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'name', 'is_available', 'numrows', 'height', 'width', 'depth', 'dept'
+        'id', 'name', 'is_available', 'numrows', 'height', 'width', 'depth', 'dept', 'layout'
     ];
 }
