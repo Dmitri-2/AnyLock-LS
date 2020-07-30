@@ -116,6 +116,7 @@
                     </li>
                 </ul>
             </div>
+           @if(Auth::check() && Auth::user()->is_admin)
             <h5 class="text-center mt-4"> Admin Tools </h5>
                 <div class="" id="">
                     <ul class="list-unstyled" >
@@ -137,6 +138,7 @@
                         </li>
                     </ul>
                 </div>
+               @endif
         </nav>
 
         <main class="content mt-4">

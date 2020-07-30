@@ -26,8 +26,7 @@ Route::middleware('auth')->group(function () {
 });
 
 //Admin routes
-Route::prefix('admin')->middleware('auth')->group(function () {
-    //TODO: need to change once we have an admin role in code
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', 'AdminController@viewAdminDashboard')->name('adminDashboard');
 
     Route::get('/lockerIssues', 'AdminController@location_list')->name('lockerIssues');
