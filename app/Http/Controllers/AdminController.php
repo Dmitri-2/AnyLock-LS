@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Service\AdminService;
 use App\Http\Service\DatabaseHelper;
+use App\Location;
 use App\Locker;
 use App\LockerRental;
 use App\User;
@@ -30,9 +31,29 @@ class AdminController extends Controller
     public function viewAdminPendingLockerRentalPage(){
 
         $pendingRentals = LockerRental::where("status", "pending")->with("locker")->get();
+        $users = User::all();
+        $lockers = Locker::getAllAvailable();
 
-        return view("admin.pendingRentals", compact("pendingRentals"));
+        return view("admin.pendingRentals", compact("pendingRentals", "users", "lockers"));
     }
+
+    public function createRentalManually(Request $request){
+
+        $rental = new LockerRental();
+        $rental->locker_id = $request->locker_id;
+        $rental->user_id = $request->user_id;
+        $rental->end_date = $request->rental_end_date;
+        $rental->status = "pending";
+        $rental->save();
+
+        if($request->has("approve_immediately")){
+            $rental->confirmRental();
+            return redirect()->back()->with(["alert" => "success", "alertMessage"=>"Locker rental created and confirmed!"]);
+        }
+
+        return redirect()->back()->with(["alert" => "success", "alertMessage"=>"Pending locker rental created!"]);
+    }
+
 
     public function confirmLockerRental(Request $request){
 

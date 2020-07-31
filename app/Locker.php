@@ -26,5 +26,8 @@ class Locker extends Model
         $this->save();
     }
 
+    public static function getAllAvailable(){
+        return Locker::where("status", "available")->get();
+    }
 
 }

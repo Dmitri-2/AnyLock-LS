@@ -37,4 +37,6 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/rentals/pending', 'AdminController@viewAdminPendingLockerRentalPage')->name('pendingRentals');
     Route::post('/rentals/pending/confirm', 'AdminController@confirmLockerRental')->name('confirmRental');
     Route::post('/rentals/pending/cancel', 'AdminController@cancelLockerRental')->name('cancelRental');
+
+    Route::post('/rentals/create/manual', 'AdminController@createRentalManually')->name('adminMakeRental');
 });
