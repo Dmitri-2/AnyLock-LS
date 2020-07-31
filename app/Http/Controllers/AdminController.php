@@ -14,11 +14,11 @@ class AdminController extends Controller
 {
     public function viewAdminDashboard(){
 
-        $lockerCount = Locker::count();
         $lockerRentalCount = LockerRental::count();
-        $userCount = User::count();
+        $users = User::all();
+        $lockers = Locker::getAllAvailable();
 
-        return view("admin.dashboard", compact('lockerRentalCount', 'userCount', 'lockerCount'));
+        return view("admin.dashboard", compact('lockerRentalCount', 'lockers', 'users'));
     }
 
     public function viewAllLockers(){
@@ -39,6 +39,11 @@ class AdminController extends Controller
 
     public function createRentalManually(Request $request){
 
+        // Set the locker into the pending state
+        $locker = Locker::find($request->locker_id);
+        $locker->makePending();
+
+        // Create the rental entry
         $rental = new LockerRental();
         $rental->locker_id = $request->locker_id;
         $rental->user_id = $request->user_id;
