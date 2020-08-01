@@ -49,4 +49,17 @@ class AdminService
         $lockers = Locker::all();
         return $lockers;
     }
+
+    public static function update_locker_status($locker_id, $status){
+        $locker = Locker::find($locker_id);
+
+        if($locker){
+            $locker->status = $status;
+            $locker->save();
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }
