@@ -6,15 +6,10 @@
     <script type="text/javascript">
         // Globals
         var curLocation = 0;
-        var shapes = <?php echo json_encode($shapes); ?>;
+        var shapes = [$.parseJSON(<?php echo json_encode($shapes); ?>)];
         var locations = <?php echo json_encode($locations); ?>;    
 
-        $(function(){ //On Load
-            // $('form').submit(function(e){
-            //     e.preventDefault();
-            // });
-
-            console.log("Shapes: "+shapes);
+        $(function(){
 
             for(var i = 0; i < locations.length; i++){
                 $("#location").append("<option>"+locations[i]+"</option>");
@@ -32,8 +27,8 @@
                     var lockerCount = 0;
                     $(".Lockers").html("");
                     for(var i = 0; i < shapes[curLocation].length; i++){
-                        $(".Lockers").append("<div id='locker-col"+i+"' class='col'></div>")
-                        for(var j = 0; j < shapes[curLocation][i] && lockerCount < data.length; j++){
+                        $(".Lockers").append("<div id='locker-col"+i+"' class='col'></div>");
+                        for(var j = 0; j < shapes[curLocation][i].length && lockerCount < data.length; j++){
                             $("#locker-col"+i).append("<label class='locker'><input type='radio' name='id' class='radio-locker' value='"+data[lockerCount]["id"]+"'><span>"+data[lockerCount]["locker_num"]+": "+data[lockerCount]["status"]+"</span></label><br>");
                             lockerCount++;
                         }
@@ -59,8 +54,6 @@
 
         async function getLockersFromLocation(){
             var data = await axios.get("{{route("getLockersLocation")}}" + "/" + locations[curLocation]);
-            console.log(data);
-            console.log(data["data"]);
             return data["data"];
         }
     </script>
@@ -79,8 +72,6 @@
           display: inline-block;
           padding: 5px 10px;
           cursor: pointer; 
-          background-image: url("images/locker.gif");
-          background-size: 100% 100%;
           height: 25%;
         }
 

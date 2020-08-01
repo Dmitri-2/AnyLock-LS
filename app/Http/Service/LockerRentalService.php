@@ -16,8 +16,16 @@ class LockerRentalService
 
     public static function getShapes(){
     	
-    	$array = array(array(1,3,1,2),array(2,3,3,4),array(1,1,2,2));
-    	return $array;
+        //$array = array(array(0),array(1,2,3),array(4,5,6),array(7,8,9));
+        //$loc->layout = json_encode($array);
+        //$loc->save();
+
+        $array = array();
+        $location = Location::all();
+        foreach ($location as $loc) {
+            array_push($array, $loc->layout);
+        }
+        return $array;
     }
 
     public static function getLocationNames(){
@@ -28,4 +36,6 @@ class LockerRentalService
         }
     	return $array;
     }
+
+
 }
