@@ -26,5 +26,14 @@ class Locker extends Model
         $this->save();
     }
 
+    public function makePending(){
+        $this->status = "pending";
+        $this->save();
+    }
+
+
+    public static function getAllAvailable(){
+        return Locker::where("status", "available")->orderBy('locker_num')->get();
+    }
 
 }

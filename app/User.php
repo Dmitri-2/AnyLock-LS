@@ -36,4 +36,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getIsAdminBadge(){
+        $badgeColor = "secondary";
+        $adminText = "Regular";
+
+        if($this->is_admin){
+            $badgeColor = "success";
+            $adminText = "Admin";
+        }
+
+        return "<span class=\"badge badge-".$badgeColor."\"> ".$adminText."</span>";
+
+    }
 }
