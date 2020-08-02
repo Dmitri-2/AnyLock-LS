@@ -106,7 +106,7 @@
                         <a class="d-block p-3 bg-light text-dark text-decoration-none" href="/">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item border-top">
-                        <a class="d-block p-3 bg-light text-dark text-decoration-none" href="#">About</a>
+                        <a class="d-block p-3 bg-light text-dark text-decoration-none" href="{{route("about")}}">About</a>
                     </li>
                     <li class="nav-item border-top border-bottom">
                         <a class="d-block p-3 bg-light text-dark text-decoration-none" href="#">Rent</a>
