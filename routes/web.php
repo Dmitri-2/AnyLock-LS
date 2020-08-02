@@ -23,6 +23,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 //User protected routes (must be logged in)
 Route::middleware('auth')->group(function () {
     Route::get('/userStatus', 'UserController@status')->name('userStatus');
+    Route::get('/user', 'UserController@viewUserPage')->name('userPage');
+    Route::post('/user/update/email', 'UserController@updateUserInfo')->name('updateUserInfo');
+    Route::post('/user/update/password', 'UserController@updateUserPassword')->name('updateUserPassword');
 });
 
 //Admin routes
