@@ -42,6 +42,8 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::post('/rentals/pending/confirm', 'AdminController@confirmLockerRental')->name('confirmRental');
     Route::post('/rentals/pending/cancel', 'AdminController@cancelLockerRental')->name('cancelRental');
 
+
+    Route::post('/rentals/create/manual', 'AdminController@createRentalManually')->name('adminMakeRental');
     Route::get('/users/all', 'AdminController@viewAllUsers')->name('allUsers');
     Route::post('/users/set-admin', 'AdminController@setUserAdmin')->name('userSetAdmin');
 });
