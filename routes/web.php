@@ -26,15 +26,15 @@ Route::middleware('auth')->group(function () {
 });
 
 //Admin routes
-Route::prefix('admin')->middleware('auth')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', 'AdminController@viewAdminDashboard')->name('adminDashboard');
 
-    Route::get('/lockerIssues', 'LockerIssuesController@location_list')->name('lockerIssues');
-    Route::post('/lockerIssues/update', 'LockerIssuesController@update_status')->name('updateBrokenStatus');
-    Route::get('/expiry_list', 'LockerIssuesController@expiry_list')->name('expiry_list');
+    Route::get('/lockerIssues', 'AdminController@location_list')->name('lockerIssues');
+    Route::post('/lockerIssues/update', 'AdminController@update_status')->name('updateBrokenStatus');
+    Route::get('/expiry_list', 'AdminController@expiry_list')->name('expiry_list');
 
-    Route::get('/rentals/all', 'LockerRentalController@viewAllLockers')->name('allRentals');
-    Route::get('/rentals/pending', 'LockerRentalController@viewAdminPendingLockerRentalPage')->name('pendingRentals');
-    Route::post('/rentals/pending/confirm', 'LockerRentalController@confirmLockerRental')->name('confirmRental');
-    Route::post('/rentals/pending/cancel', 'LockerRentalController@cancelLockerRental')->name('cancelRental');
+    Route::get('/rentals/all', 'AdminController@viewAllLockers')->name('allRentals');
+    Route::get('/rentals/pending', 'AdminController@viewAdminPendingLockerRentalPage')->name('pendingRentals');
+    Route::post('/rentals/pending/confirm', 'AdminController@confirmLockerRental')->name('confirmRental');
+    Route::post('/rentals/pending/cancel', 'AdminController@cancelLockerRental')->name('cancelRental');
 });
