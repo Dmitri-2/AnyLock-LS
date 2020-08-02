@@ -21,10 +21,21 @@ class AdminController extends Controller
         return view("admin.dashboard", compact('lockerRentalCount', 'lockers', 'users'));
     }
 
+    public function viewAllUsers(){
+        $users = User::all();
+        return view("admin.manageUsers", compact("users"));
+    }
+
+    public function setUserAdmin(Request $request){
+        $user = User::find($request->user_id);
+        $user->is_admin = !$user->is_admin;
+        $user->save();
+
+        return redirect(route("allUsers"))->with(['alert' => 'success', 'alertMessage' => $user->name."'s admin status has been updated."]);
+    }
+
     public function viewAllLockers(){
-
         $rentals = LockerRental::all();
-
         return view("admin.rentals", compact("rentals"));
     }
 
