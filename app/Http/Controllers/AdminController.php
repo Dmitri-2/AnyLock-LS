@@ -9,6 +9,7 @@ use App\Locker;
 use App\LockerRental;
 use App\User;
 use Illuminate\Http\Request;
+use Route;
 
 class AdminController extends Controller
 {
@@ -109,6 +110,23 @@ class AdminController extends Controller
         if($request->broken)
         {
             $status = "broken";
+            $currentLocker = AdminService::get_locker($request->locker_id);
+
+            if($currentLocker->status == 'rented' || $currentLocker->status == 'expiring')
+            {
+                if(!AdminService::update_for_broken($request->locker_id, 'active'))
+                {
+                    return redirect()->back()->with(['alert' => 'danger', 'alertMessage' => "The locker status did not update. Please try again."]);
+                }
+            }
+            else if($currentLocker->status == 'pending')
+            {
+                if(!AdminService::update_for_broken($request->locker_id, 'pending'))
+                {
+                    return redirect()->back()->with(['alert' => 'danger', 'alertMessage' => "The locker status did not update. Please try again."]);
+                }
+            }
+
         }
         else if($request->fixed)
         {
