@@ -17,15 +17,19 @@
                         <th scope="col">Location</th>
                         <th scope="col">End Date</th>
                         <th scope="col">Status</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($rentals as $current)
                     <tr>
-                        <td>{{$current->locker_id}}</td>
+                        <td>{{$current->locker_num}}</td>
                         <td>{{$current->location}}</td>
                         <td>{{$current->end_date}}</td>
                         <td>{{$current->status}}</td>
+                    @if($current->status == 'rented')
+                        <td><button type="button" class="btn btn-primary">Renew</button>
+                    @endif
                     </tr>
 @endforeach
                     </tbody>
@@ -34,5 +38,12 @@
         </div>
     </div>
     @endsection
+@push('js')
+<script>
+    @foreach($rentals as $rental)
+    console.log({{$rental->locker_id}});
+    @endforeach
+</script>
+@endpush
 
 
