@@ -112,7 +112,7 @@
                         <a class="d-block p-3 bg-light text-dark text-decoration-none" href="#">About</a>
                     </li>
                     <li class="nav-item border-top border-bottom">
-                        <a class="d-block p-3 bg-light text-dark text-decoration-none" href="#">Rent</a>
+                        <a class="d-block p-3 bg-light text-dark text-decoration-none" href={{route('rent')}}>Rent</a>
                     </li>
                     <li class="nav-item border-top border-bottom">
                         <a class="d-block p-3 bg-light text-dark text-decoration-none" href={{route('userStatus')}}>Status</a>

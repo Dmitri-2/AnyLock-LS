@@ -125,7 +125,9 @@
                                         <option selected disabled>Please Select Location</option>
                                     </select>
                                 </div>
-                                <div class="Lockers row">
+                                <div class="col form-group">
+                                    <div class="Lockers row">
+                                    </div>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="duration">Rental Duration</label>
