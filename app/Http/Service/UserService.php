@@ -24,8 +24,12 @@ class UserService
         //Loop through all user's rental's form rental_lockers table
         foreach ($lockers as $locker) {
             //get all the lockers using the locker ids that user has rented out
-            $locker_collection = Locker::where('locker_num', $locker->locker_id)->get();
-            foreach ($locker_collection as $current) {
+            $currentBuffer = Locker::where('id', $locker->locker_id)->get();
+            $current = $currentBuffer[0];
+
+            //check if the locker is active or pending
+            if($locker->status == 'active' || $locker->status == 'pending')
+            {
                 //check if locker is rented, and still rented
                 $end_date = new DateTime($locker->end_date);
 
@@ -33,7 +37,10 @@ class UserService
                 $copy = $locker;
 
                 //get locker num
-                $copy->locker_id = $current->locker_num;
+                $copy->locker_num = $current->locker_num;
+
+                //get the locker id
+                $copy->locker_id = $current->locker_id;
 
                 //get status
                 $copy->status = $current->status;
@@ -47,7 +54,9 @@ class UserService
                 //push onto new array
                 array_push($rentals, $copy);
             }
+
         }
+
         return $rentals;
     }
 }
