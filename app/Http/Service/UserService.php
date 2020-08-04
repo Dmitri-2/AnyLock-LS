@@ -18,7 +18,7 @@ class UserService
 
     public static function get_rentals()
     {
-//Here we are getting all of the rentals from the locker_rentals table
+        //Here we are getting all of the rentals from the locker_rentals table
         //for the user that is logged in.
         $lockers = LockerRental::where('user_id', Auth::user()->id)->orderBy('locker_id')->get();
         $rentals = array();
