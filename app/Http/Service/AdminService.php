@@ -8,34 +8,16 @@ use App\Location;
 
 class AdminService
 {
-    public static function get_expiry_list($status)
+    public static function get_rentals_by_status($status)
     {
-        $lockers = Locker::all();
-        $expired_list = array();
+        $rentals = LockerRental::all();
+        $list = array();
 
-        foreach ($lockers as $locker) {
-            if ($locker->status === $status) {
-                $copy = $locker;
-                //get the full name and email and store into locker obj
-                $rentals = LockerRental::where('locker_id', $locker->id)->get();
-                foreach ($rentals as $curr_rental) {
-                    $full_name = $curr_rental->full_name;
-                    $email = $curr_rental->email;
-                    $copy->full_name = $full_name;
-                    $copy->email = $email;
-                }
-
-                //get location and store into locker obj
-                $locations = Location::where('id', $locker->location_id)->get();
-                foreach ($locations as $location) {
-                    $name = $location->name;
-                    $copy->location_name = $name;
-                }
-                array_push($expired_list, $copy);
-            }
-
+        foreach ($rentals as $rental) {
+            if($rental->locker->status === $status)
+                array_push($list, $rental);
         }
-        return $expired_list;
+        return $list;
     }
 
     public static function get_locations()

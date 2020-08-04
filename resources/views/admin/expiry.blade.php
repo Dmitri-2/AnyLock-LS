@@ -1,6 +1,6 @@
 @extends("layouts.master")
 @section('body')
-    
+
     <div class="container-fluid">
         <div class="row text-center">
             <div class="col">
@@ -19,16 +19,16 @@
                     <th scope="col"></th>
                     </thead>
                     <tbody>
-                    @foreach($expired as $locker)
+                    @foreach($expired as $rental)
                         <tr>
-                            <td>{{$locker->full_name}}</td>
-                            <td>{{$locker->email}}</td>
-                            <td>{{$locker->location_name}}</td>
-                            <td>{{$locker->locker_num}}</td>
+                            <td>{{$rental->user->name}}</td>
+                            <td>{{$rental->user->email}}</td>
+                            <td>{{$rental->locker->location->name}}</td>
+                            <td>{{$rental->locker->locker_num}}</td>
                             <td class="text-center">
                                 <form action="{{route('checkedOut')}}" method="POST">
                                     @csrf
-                                    <input type="hidden" name="rental_id" value="{{$locker->id}}">
+                                    <input type="hidden" name="rental_id" value="{{$rental->id}}">
                                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
                                       <i class="fas fa-store-alt-slash"></i>
                                     </button>
@@ -44,10 +44,10 @@
                                           </div>
                                           <div class="modal-body">
                                             <span class="font-weight-bold">
-                                                {{$locker->location_name}}: #{{$locker->locker_num}} Rented by: {{$locker->full_name}}
+                                                {{$rental->locker->location->name}}: #{{$rental->locker->locker_num}} Rented by: {{$rental->user->name}}
                                             </span>
                                             <hr>
-                                            I, {{$user->name}}, have checked out and confirmed locker #{{$locker->locker_num}} has been cleaned and is ready to be rented again.
+                                            I, {{$user->name}}, have checked out and confirmed locker #{{$rental->locker->locker_num}} has been cleaned and is ready to be rented again.
                                           </div>
                                           <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -82,16 +82,16 @@
                     <th scope="col"></th>
                     </thead>
                     <tbody>
-                    @foreach($expiring as $locker)
+                    @foreach($expiring as $rental)
                         <tr>
-                            <td>{{$locker->full_name}}</td>
-                            <td>{{$locker->email}}</td>
-                            <td>{{$locker->location_name}}</td>
-                            <td>{{$locker->locker_num}}</td>
+                            <td>{{$rental->user->name}}</td>
+                            <td>{{$rental->user->email}}</td>
+                            <td>{{$rental->locker->location->name}}</td>
+                            <td>{{$rental->locker->locker_num}}</td>
                             <td class="text-center">
                                 <form action="{{route('checkedOut')}}" method="POST">
                                     @csrf
-                                    <input type="hidden" name="rental_id" value="{{$locker->id}}">
+                                    <input type="hidden" name="rental_id" value="{{$rental->id}}">
                                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
                                       <i class="fas fa-store-alt-slash"></i>
                                     </button>
@@ -107,10 +107,10 @@
                                           </div>
                                           <div class="modal-body">
                                             <span class="font-weight-bold">
-                                                {{$locker->location_name}}: #{{$locker->locker_num}} Rented by: {{$locker->full_name}}
+                                                {{$rental->locker->location->name}}: #{{$rental->locker->locker_num}} Rented by: {{$rental->user->name}}
                                             </span>
                                             <hr>
-                                            I, {{$user->name}}, have checked out and confirmed locker #{{$locker->locker_num}} has been cleaned and is ready to be rented again.
+                                            I, {{$user->name}}, have checked out and confirmed locker #{{$rental->locker->locker_num}} has been cleaned and is ready to be rented again.
                                           </div>
                                           <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -92,8 +92,8 @@ class AdminController extends Controller
 
     public function expiry_list() {
         $user = Auth::user();
-        $expired = AdminService::get_expiry_list('expired');
-        $expiring = AdminService::get_expiry_list('expiring');
+        $expired = AdminService::get_rentals_by_status('expired');
+        $expiring = AdminService::get_rentals_by_status('expiring');
         return view('admin.expiry', compact('expired', 'expiring', 'user'));
     }
 
