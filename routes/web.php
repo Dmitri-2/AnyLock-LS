@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user', 'UserController@viewUserPage')->name('userPage');
     Route::post('/user/update/email', 'UserController@updateUserInfo')->name('updateUserInfo');
     Route::post('/user/update/password', 'UserController@updateUserPassword')->name('updateUserPassword');
+    Route::post('/userStatus/renewLocker', 'UserController@renew_locker')->name('renewLocker');
 });
 
 //Admin routes

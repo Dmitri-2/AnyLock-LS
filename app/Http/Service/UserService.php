@@ -45,7 +45,7 @@ class UserService
                 $copy->locker_num = $current->locker_num;
 
                 //get the locker id. Returning this for the renewal functionality.
-                $copy->locker_id = $current->locker_id;
+                $copy->locker_id = $current->id;
 
                 //get status
                 $copy->status = $current->status;

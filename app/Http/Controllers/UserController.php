@@ -48,4 +48,12 @@ class UserController extends Controller
         return redirect()->route("userPage")->with(["alert" => "success", "alertMessage"=>"Your password has been updated!"]);
     }
 
+    public function renew_locker(Request $request){
+        $user = Auth::user();
+
+        // dd($request->locker_id);
+
+        return redirect()->route("userStatus")->with(["alert" => "success", "alertMessage" => "You have successfully renewed your locker!"]);
+    }
+
 }

@@ -28,7 +28,12 @@
                         <td>{{$current->end_date}}</td>
                         <td>{{$current->status}}</td>
                     @if($current->status == 'rented')
-                        <td><button type="button" class="btn btn-primary">Renew</button>
+                        <form method="POST" action="{{ route('renewLocker') }}">
+                        {{ csrf_field() }}
+                            <input id="renewal" name="renewal" value="renewal" hidden>
+                            <input id="{{$current->locker_id}}" name="locker_id" value="{{$current->locker_id}}" hidden>
+                            <td><button type="submit" class="btn btn-primary">Renew</button>
+                        </form>
                     @endif
                     </tr>
 @endforeach
@@ -38,12 +43,5 @@
         </div>
     </div>
     @endsection
-@push('js')
-<script>
-    @foreach($rentals as $rental)
-    console.log({{$rental->locker_id}});
-    @endforeach
-</script>
-@endpush
 
 
