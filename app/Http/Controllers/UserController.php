@@ -66,7 +66,7 @@ class UserController extends Controller
             $newExpDate = Carbon::createFromFormat('Y-m-d', $request->rental_end_date);
             $diffInDays = $currentExpDate->diffInDays($newExpDate, false);
 
-            if($diffInDays <= 0 || $diffInDays == -1)
+            if($diffInDays <= 0)
             {
                 return redirect()->route("userStatus")->with(["alert" => "danger", "alertMessage" => "The locker end date you have chosen is either the same or sooner than the current end date. Please pick a date past your current end date."]);
             }
