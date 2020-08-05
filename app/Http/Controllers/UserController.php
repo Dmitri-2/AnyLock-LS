@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Service\UserService;
+use App\LockerRental;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -11,6 +12,8 @@ use App\Locker;
 use App\Location;
 use DateTime;
 use Carbon\Carbon;
+use DebugBar;
+
 
 class UserController extends Controller
 {
@@ -95,6 +98,14 @@ class UserController extends Controller
 
 
         return redirect()->route("userStatus")->with(["alert" => "success", "alertMessage" => "You have successfully renewed your locker!"]);
+    }
+
+
+    public function cancelUserRental(Request $request){
+        $rental = LockerRental::where("id", $request->rental_id)->get()->first();
+        $rental->cancelUserRental();
+
+        return redirect()->back()->with(["alert" => "success", "alertMessage"=>"Locker rental cancelled!"]);
     }
 
 }

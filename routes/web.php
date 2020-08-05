@@ -20,10 +20,14 @@ Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
 
-
 //User protected routes (must be logged in)
 Route::middleware('auth')->group(function () {
     Route::get('/userStatus', 'UserController@status')->name('userStatus');
+    Route::post('cancel_rental', 'UserController@cancelUserRental')->name('cancelUserRental');
+
+    Route::get('/rent', 'RentController@index')->name('rent');
+    Route::post('/rent-attempt', 'RentController@tryRent')->name('tryRent');
+
     Route::get('/user', 'UserController@viewUserPage')->name('userPage');
     Route::post('/user/update/email', 'UserController@updateUserInfo')->name('updateUserInfo');
     Route::post('/user/update/password', 'UserController@updateUserPassword')->name('updateUserPassword');

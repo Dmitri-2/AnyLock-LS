@@ -1,23 +1,20 @@
 @extends('layouts.master')
 
 @section('body')
-    <div class="container-fluid">
-        <div class="row text-center">
-            <div class="col">
-                <h1> Locker Status</h1>
-                <p>An overview of all your lockers</p>
-            </div>
-        </div>
-        <div class="card col-8 mx-auto">
-            <div class="card-body text-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                    <h2 class="my-3 text-center"> Locker Status</h2>
+                <p class="text-center">An overview of all your lockers</p>
+                <div class="table-responsive-lg>">
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th scope="col">Locker Number</th>
-                        <th scope="col">Location</th>
-                        <th scope="col">End Date</th>
-                        <th scope="col">Status</th>
-                        <th scope="col"></th>
+                        <th class="text-center">Locker #</th>
+                        <th class="text-center">Location</th>
+                        <th class="text-center">End Date</th>
+                        <th class="text-center">Status</th>
+                        <th colspan="2" class="text-center">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -34,10 +31,10 @@
                     @endforeach
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
     </div>
-
 
     @foreach($rentals as $current)
     @if($current->status == 'rented' || $current->status == 'expiring')
