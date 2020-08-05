@@ -6,6 +6,11 @@ use App\Http\Service\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\LockerRental;
+use App\Locker;
+use App\Location;
+use DateTime;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -49,9 +54,44 @@ class UserController extends Controller
     }
 
     public function renew_locker(Request $request){
-        $user = Auth::user();
+        $lockerRentals = LockerRental::where('user_id', Auth::user()->id)->where("status", "active")->where("locker_id", $request->locker_id)->with("Locker")->orderBy('locker_id')->get();
 
-        // dd($request->locker_id);
+
+
+        foreach($lockerRentals as $lockerRental)
+        {
+            //error checking
+            $end_date = new DateTime($lockerRental->end_date);
+            $currentExpDate =  Carbon::createFromFormat('Y-m-d', $end_date->format('Y-m-d'));
+            $newExpDate = Carbon::createFromFormat('Y-m-d', $request->rental_end_date);
+            $diffInDays = $currentExpDate->diffInDays($newExpDate, false);
+
+            if($diffInDays <= 0 || $diffInDays == -1)
+            {
+                return redirect()->route("userStatus")->with(["alert" => "danger", "alertMessage" => "The locker end date you have chosen is either the same or sooner than the current end date. Please pick a date past your current end date."]);
+            }
+
+            //----------------------update the locker
+            //Check if the new date will make it expiring or rented
+            $todaysDate = Carbon::now();
+            $expDayDiff = $todaysDate->diffInDays($newExpDate, false);
+
+            if($expDayDiff <= 7)
+            {
+                $lockerRental->locker->status = "expiring";
+            }
+            else{
+                $lockerRental->locker->status = "rented";
+            }
+
+            $lockerRental->locker->save();
+
+            //----------------------update the locker rental end date
+            $lockerRental->end_date = $newExpDate;
+            $lockerRental->save();
+
+        }
+
 
         return redirect()->route("userStatus")->with(["alert" => "success", "alertMessage" => "You have successfully renewed your locker!"]);
     }
