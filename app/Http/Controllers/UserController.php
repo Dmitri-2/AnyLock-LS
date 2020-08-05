@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Service\UserService;
-use App\LockerRental;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
