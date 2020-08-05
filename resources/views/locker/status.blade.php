@@ -25,7 +25,7 @@
                         <td>{{$current->end_date}}</td>
                         <td>{{$current->status}}</td>
                     @if($current->status == 'rented' || $current->status == 'expiring')
-                        <td><button class="btn btn-success d-block" data-toggle="modal" data-target="#renewLockerForm-{{$current->locker_id}}"> <i class="fas fa-plus-square"></i>Renew</button>
+                        <td><button class="btn btn-success d-block" data-toggle="modal" data-target="#renewLockerForm-{{$current->locker_id}}">  Renew</button>
                     @endif
                     </tr>
                     @endforeach
