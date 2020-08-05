@@ -27,6 +27,15 @@
                     @if($current->status == 'rented' || $current->status == 'expiring')
                         <td><button class="btn btn-success d-block" data-toggle="modal" data-target="#renewLockerForm-{{$current->locker_id}}">  Renew</button>
                     @endif
+                    <td>
+                                @if($current->status != 'expired')
+                                <form method="POST" action="{{route("cancelUserRental")}}">
+                                    @csrf
+                                    <input name="rental_id" value="{{$current->id}}" hidden>
+                                    <button type="submit" class="btn btn-block btn-sm btn-danger">Cancel Rental</button>
+                                </form>
+                                    @endif
+                            </td>
                     </tr>
                     @endforeach
                     </tbody>
