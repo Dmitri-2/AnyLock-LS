@@ -60,7 +60,8 @@ class UserController extends Controller
 
         foreach($lockerRentals as $lockerRental)
         {
-            //error checking
+            //---------------------------error checking
+            //check if the date is before or on the same day as the current endate
             $end_date = new DateTime($lockerRental->end_date);
             $currentExpDate =  Carbon::createFromFormat('Y-m-d', $end_date->format('Y-m-d'));
             $newExpDate = Carbon::createFromFormat('Y-m-d', $request->rental_end_date);
