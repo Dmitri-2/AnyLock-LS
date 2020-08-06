@@ -78,11 +78,16 @@
                                             <input type="submit" class="btn btn-warning btn-block font-weight-bold" value="Cancel Rental">
                                         </form>
                                         <hr>
-                                        <form action="{{route('updateDate')}}" method="POST" onchange="this.submit()">
+                                        <form action="{{route('updateDate')}}" method="POST" >
                                             @csrf
                                             <div class="form-group">
-                                                <label for="rental_end_date"><h5>Change Rental End Date </h5></label>
-                                                <input class="form-control" type="date" name="end_date" id="rental_end_date" required>
+                                                <label for="rental_end_date"><h5>Change Rental End Date</h5></label>
+                                                <div class="input-group mb-3">
+                                                  <input class="form-control" type="date" name="end_date" id="rental_end_date" required>
+                                                  <div class="input-group-append">
+                                                    <input class="btn btn-primary" type="submit">
+                                                  </div>
+                                                </div>
                                             </div>
                                             <input type="hidden" name="rental_id" value="{{$rental->id}}">
                                         </form>
