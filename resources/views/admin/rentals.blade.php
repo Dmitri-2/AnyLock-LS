@@ -37,30 +37,44 @@
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                       <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Edit Locker</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Edit Rental</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true">&times;</span>
                                         </button>
                                       </div>
                                       <div class="modal-body">
-                                        <span class="font-weight-bold">
-                                            {{$rental->locker->location->name}}: #{{$rental->locker->locker_num}} Rented by: {{$rental->user->name}}
-                                        </span>
+                                        <div>
+                                            <strong> User: </strong> {{$rental->user->name}}
+                                        </div>
+                                        <div>
+                                            <strong> Locker Number: </strong> {{$rental->locker->locker_num}}
+                                        </div>
+                                        <div>
+                                            <strong> Location: </strong> {{$rental->locker->location->name}}
+                                        </div>
                                         <hr>
+                                        <form action="{{route('confirmRental')}}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="rental_id" value="{{$rental->id}}">
+                                            <input type="submit" class="btn btn-warning btn-block font-weight-bold" value="Set Active">
+                                        </form>
+                                        <br>
                                         <form action="{{route('checkedOut')}}" method="POST">
                                             @csrf
                                             <input type="hidden" name="rental_id" value="{{$rental->id}}">
-                                            <input type="submit" class="btn btn-primary" value="Check Out">
+                                            <input type="submit" class="btn btn-warning btn-block font-weight-bold" value="Check Out">
                                         </form>
+                                        <br>
                                         <form action="{{route('cancelRental')}}" method="POST">
                                             @csrf
                                             <input type="hidden" name="rental_id" value="{{$rental->id}}">
-                                            <input type="submit" class="btn btn-primary" value="Cancel">
+                                            <input type="submit" class="btn btn-warning btn-block font-weight-bold" value="Cancel Rental">
                                         </form>
+                                        <hr>
                                         <form action="{{route('updateDate')}}" method="POST" onchange="this.submit()">
                                             @csrf
                                             <div class="form-group">
-                                                <label for="rental_end_date">Rental End Date </label>
+                                                <label for="rental_end_date"><h5>Change Rental End Date </h5></label>
                                                 <input class="form-control" type="date" name="end_date" id="rental_end_date" required>
                                             </div>
                                             <input type="hidden" name="rental_id" value="{{$rental->id}}">
