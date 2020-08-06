@@ -6,8 +6,17 @@
     <script type="text/javascript">
         // Globals
         var curLocation = 0;
-        var shapes = [$.parseJSON(<?php echo json_encode($shapes); ?>)];
-        var locations = <?php echo json_encode($locations); ?>;    
+        var locations = <?php echo json_encode($locations); ?>; 
+        var layouts = <?php echo json_encode($shapes); ?>;
+
+        console.log(layouts);
+        var shapes = [];
+
+        for(var i = 0; i < locations.length; i++){
+            shapes.push($.parseJSON(layouts[i]));
+        }
+
+        console.log(shapes);
 
         $(function(){
 
