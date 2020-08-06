@@ -31,7 +31,7 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4 class="mx-auto">Confirm Locker Rental</h4>
+                                                <h4 class="mx-auto">Confirm Locker Check Out</h4>
                                             </div>
                                             <div class="modal-body">
                                                 <div>

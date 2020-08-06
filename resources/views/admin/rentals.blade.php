@@ -20,6 +20,13 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @if(empty ( $statusrentals ))
+                    <tr>
+                        <td colspan="6" class="text-center">
+                            <h3>No Rentals</h3>
+                        </td>
+                    </tr>
+                    @else
                     @foreach($statusrentals as $rental)
                         <tr>
                             <td class="text-center">{{$rental->locker->locker_num}}</td>
@@ -89,6 +96,7 @@
                             </td>
                         </tr>
                     @endforeach
+                    @endif
                     </tbody>
                 </table>
                 @endforeach

@@ -38,16 +38,10 @@ class AdminController extends Controller
 
     public function viewAllLockers(){
         $all = LockerRental::all();
-        $rentals = array();
+        $rentals = array('pending' => [], 'active' => [], 'checked-out' => [], 'abandoned' => [], 'cancelled' => []);
         foreach ($all as $rental) {
-            if(array_key_exists ( $rental->status , $rentals )){
-                array_push($rentals[$rental->status], $rental);
-            }
-            else{
-                $rentals[$rental->status] = array($rental);
-            }
+            array_push($rentals[$rental->status], $rental);
         }
-
         return view("admin.rentals", compact("rentals"));
     }
 
