@@ -48,4 +48,5 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::post('/users/set-admin', 'AdminController@setUserAdmin')->name('userSetAdmin');
 
     Route::post('/rentals/checked/confirm', 'AdminController@confirmCheckedOut')->name('checkedOut');
+    Route::post('/rentals/update/date', 'AdminController@updateDate')->name('updateDate');
 });
