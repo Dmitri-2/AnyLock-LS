@@ -24,6 +24,9 @@
     {{--Bootstrap--}}
     <link rel="stylesheet" href="{{ URL::asset('/css/bootstrap.min.css') }}">
 
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
     <style>
         html, body, .app{
             width: 100%;
@@ -109,7 +112,7 @@
                         <a class="d-block p-3 bg-light text-dark text-decoration-none" href="{{route("about")}}">About</a>
                     </li>
                     <li class="nav-item border-top border-bottom">
-                        <a class="d-block p-3 bg-light text-dark text-decoration-none" href="#">Rent</a>
+                        <a class="d-block p-3 bg-light text-dark text-decoration-none" href={{route('rent')}}>Rent</a>
                     </li>
                     <li class="nav-item border-top border-bottom">
                         <a class="d-block p-3 bg-light text-dark text-decoration-none" href={{route('userStatus')}}>Status</a>

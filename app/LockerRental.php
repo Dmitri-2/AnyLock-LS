@@ -42,4 +42,9 @@ class LockerRental extends Model
         $this->save();
         $this->locker->makeAvailable();
     }
+
+    public function cancelUserRental(){
+        $this->locker->makeExpired();
+    }
+
 }

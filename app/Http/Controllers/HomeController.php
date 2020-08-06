@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Service\LockerRentalService;
+use App\User;
+    
 
 class HomeController extends Controller
 {

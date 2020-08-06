@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Service\UserService;
+use App\LockerRental;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use DebugBar;
 
 class UserController extends Controller
 {
@@ -48,4 +50,10 @@ class UserController extends Controller
         return redirect()->route("userPage")->with(["alert" => "success", "alertMessage"=>"Your password has been updated!"]);
     }
 
+    public function cancelUserRental(Request $request){
+        $rental = LockerRental::where("id", $request->rental_id)->get()->first();
+        $rental->cancelUserRental();
+
+        return redirect()->back()->with(["alert" => "success", "alertMessage"=>"Locker rental cancelled!"]);
+    }
 }
