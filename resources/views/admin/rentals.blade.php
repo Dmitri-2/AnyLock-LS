@@ -2,14 +2,14 @@
 
 
 @section('body')
-
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <h2 class="my-3 text-center">All Rentals</h2>
-
+                @foreach($rentals as $status => $statusrentals)
                 <table class="table table-striped">
                     <thead>
+                        <h2>{{ucfirst($status)}}</h2>
                     <tr>
                         <th scope="col" class="text-center">Locker Id #</th>
                         <th scope="col" class="text-center">Locker Location</th>
@@ -20,7 +20,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($rentals as $rental)
+                    @foreach($statusrentals as $rental)
                         <tr>
                             <td class="text-center">{{$rental->locker->locker_num}}</td>
                             <td class="text-center">{{$rental->locker->location->name}}</td>
@@ -91,7 +91,7 @@
                     @endforeach
                     </tbody>
                 </table>
-
+                @endforeach
             </div>
         </div>
     </div>
