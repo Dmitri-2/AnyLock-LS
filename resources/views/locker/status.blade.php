@@ -19,17 +19,15 @@
                     </thead>
                     <tbody>
                     @foreach($rentals as $current)
-                        <tr>
-                            <td class="text-center">{{$current->locker_num}}</td>
-                            <td class="text-center">{{$current->location}}</td>
-                            <td class="text-center">{{$current->end_date()}}</td>
-                            <td class="text-center">{{$current->status}}</td>
-                                <td class="text-center">
-                                    @if($current->status == 'rented')
-                                    <button type="button" class="btn btn-block btn-sm btn-primary">Renew Rental</button>
-                                    @endif
-                                </td>
-                            <td>
+                    <tr>
+                        <td>{{$current->locker_num}}</td>
+                        <td>{{$current->location}}</td>
+                        <td>{{$current->end_date}}</td>
+                        <td>{{$current->status}}</td>
+                    @if($current->status == 'rented' || $current->status == 'expiring')
+                        <td><button class="btn btn-block btn-sm btn-success" data-toggle="modal" data-target="#renewLockerForm-{{$current->locker_id}}">  Renew</button>
+                    @endif
+                    <td>
                                 @if($current->status != 'expired')
                                 <form method="POST" action="{{route("cancelUserRental")}}">
                                     @csrf
@@ -38,7 +36,7 @@
                                 </form>
                                     @endif
                             </td>
-                        </tr>
+                    </tr>
                     @endforeach
                     </tbody>
                 </table>
@@ -46,6 +44,38 @@
             </div>
         </div>
     </div>
-@endsection
+
+    @foreach($rentals as $current)
+    @if($current->status == 'rented' || $current->status == 'expiring')
+    <div class="modal fade" id="renewLockerForm-{{$current->locker_id}}" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="mx-auto">Choose a Date to Renew Until</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{route('renewLocker')}}">
+                        @csrf
+                        <input id="{{$current->locker_id}}" name="locker_id" value="{{$current->locker_id}}" hidden>
+                        <div class="form-group">
+                            <label for="rental_end_date">Rental End Date </label>
+                            <input class="form-control" type="date" name="rental_end_date" id="rental_end_date" required>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Cancel</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-success btn-block">Renew</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+    @endforeach
+    @endsection
 
 
