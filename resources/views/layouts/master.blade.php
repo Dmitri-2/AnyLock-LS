@@ -41,7 +41,7 @@
         }
 
         .sidebar {
-            background:white;
+            background-color: white;
             width: 15%;
         }
 
@@ -49,12 +49,53 @@
             width: 85%;
         }
 
-        /*.nav-item:hover {*/
-            /*padding: 10px;*/
-        /*}*/
+        .sidebar-item {
+            color: black;
+            background-color: white;
+        }
+
+        .sidebar-item:hover {
+            background-color: #b3333345;
+        }
+
+        .sidebar-group {
+            list-style: none;
+            border-radius: 10px;
+            box-shadow: 0px 2px 12px rgba(50, 50, 50, 0.32) !important;
+            border: 1px rgba(80, 105, 107, 0.29) solid;
+            padding: 0px;
+            margin: 14px;
+        }
+
+        .sidebar-group :first-child{
+            border-radius: 10px 10px 0px 0px;
+        }
+
+        .sidebar-group :last-child{
+            border-radius: 0px 0px 10px 10px;
+        }
+
+
+        .sidebar-link {
+            color: #394c50;
+            font-weight: 500;
+            padding: 10px;
+        }
+
+        .sidebar-link:hover {
+            color: black;
+        }
+
+        .active {
+            background-color: #b3333345 !important;
+        }
+
+        .active-top {
+            font-weight: 600;
+        }
 
         /*
-         Sidebar design and styling is based on the following guides, with minor code excerpts used from them:
+         Sidebar design is based on the following guides, with minor code excerpts used from them:
             https://bootstrapious.com/p/bootstrap-sidebar
             https://medium.com/@davidmellul/make-a-sidebar-for-your-website-the-easy-way-html5-css3-vanillajs-eccbb4d0cff6
         */
@@ -70,14 +111,14 @@
                 <!-- Authentication Links -->
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "login") active @endif" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "login") active-top @endif" href="{{ route('login') }}">{{ __('Login') }}</a>
                     </li>
                     @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "register") active @endif" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link mx-md-2 px-md-0 pb-md-0 @if (Route::current()->getName() == "register") active-top @endif" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                     @endif
-                    @else
+                @else
 
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link pb-md-0 dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -103,48 +144,60 @@
             </ul>
     </nav>
         <nav class="sidebar border-right">
-            <div class="" id="">
-                <ul class="list-unstyled" >
-                    <li class="nav-item">
-                        <a class="d-block p-3 bg-light text-dark text-decoration-none" href="/">Home <span class="sr-only">(current)</span></a>
+            <ul class="sidebar-group" >
+                <li class="nav-item sidebar-item @if (Route::current()->getName() == "home") active @endif">
+                    <a class="d-block sidebar-link text-decoration-none" href="{{route("home")}}">Home</a>
+                </li>
+                <li class="nav-item sidebar-item @if (Route::current()->getName() == "about") active @endif">
+                    <a class="d-block sidebar-link text-decoration-none" href="{{route("about")}}">About</a>
+                </li>
+                @guest
+                    <li class="nav-item sidebar-item @if (Route::current()->getName() == "login") active @endif">
+                        <a class="d-block sidebar-link text-decoration-none" href="{{ route('login') }}">Login</a>
                     </li>
-                    <li class="nav-item border-top">
-                        <a class="d-block p-3 bg-light text-dark text-decoration-none" href="{{route("about")}}">About</a>
+                    <li class="nav-item sidebar-item @if (Route::current()->getName() == "register") active @endif">
+                        <a class="d-block sidebar-link text-decoration-none" href="{{ route('register') }}">Register</a>
                     </li>
-                    <li class="nav-item border-top border-bottom">
-                        <a class="d-block p-3 bg-light text-dark text-decoration-none" href={{route('rent')}}>Rent</a>
+                @endguest
+            </ul>
+
+            @if(Auth::check())
+                <ul class="sidebar-group mt-3" >
+                    <li class="nav-item sidebar-item @if (Route::current()->getName() == "rent") active @endif">
+                        <a class="d-block sidebar-link text-decoration-none" href={{route('rent')}}>Rent a Locker</a>
                     </li>
-                    <li class="nav-item border-top border-bottom">
-                        <a class="d-block p-3 bg-light text-dark text-decoration-none" href={{route('userStatus')}}>Status</a>
+                    <li class="nav-item sidebar-item @if (Route::current()->getName() == "userStatus") active @endif">
+                        <a class="d-block sidebar-link text-decoration-none" href={{route('userStatus')}}>My Lockers</a>
                     </li>
                 </ul>
-            </div>
-           @if(Auth::check() && Auth::user()->is_admin)
-            <h5 class="text-center mt-4"> Admin Tools </h5>
+            @endif
+
+            @if(Auth::check() && Auth::user()->is_admin)
+                <h5 class="text-center mt-4"> Admin Tools </h5>
                 <div class="" id="">
-                    <ul class="list-unstyled" >
-                        <li class="nav-item border-top border-bottom">
-                            <a class="d-block p-3 bg-light text-dark text-decoration-none" href={{route('adminDashboard')}}>Dashboard</a>
+                    <ul class="sidebar-group" >
+                        <li class="nav-item sidebar-item @if (Route::current()->getName() == "adminDashboard") active @endif">
+                            <a class="d-block sidebar-link text-decoration-none" href={{route('adminDashboard')}}>Dashboard</a>
                         </li>
-                        <li class="nav-item border-top border-bottom">
-                            <a class="d-block p-3 bg-light text-dark text-decoration-none" href={{route('allRentals')}}>All Rentals</a>
+                        <li class="nav-item sidebar-item @if (Route::current()->getName() == "allRentals") active @endif">
+                            <a class="d-block sidebar-link text-decoration-none" href={{route('allRentals')}}>All Rentals</a>
                         </li>
-                        <li class="nav-item border-top border-bottom">
-                            <a class="d-block p-3 bg-light text-dark text-decoration-none" href={{route('pendingRentals')}}>Pending Rentals</a>
+                        <li class="nav-item sidebar-item @if (Route::current()->getName() == "pendingRentals") active @endif">
+                            <a class="d-block sidebar-link text-decoration-none" href={{route('pendingRentals')}}>Pending Rentals</a>
                         </li>
-                        <li class="nav-item border-top border-bottom">
-                            <a class="d-block p-3 bg-light text-dark text-decoration-none" href={{route('lockerIssues')}}>Locker Issues</a>
+                        <li class="nav-item sidebar-item @if (Route::current()->getName() == "lockerIssues") active @endif">
+                            <a class="d-block sidebar-link text-decoration-none" href={{route('lockerIssues')}}>Locker Issues</a>
                         </li>
-                        <li class="nav-item border-top border-bottom">
-                            <a class="d-block p-3 bg-light text-dark text-decoration-none" href={{route("expiry_list")}}>Expiry
+                        <li class="nav-item sidebar-item @if (Route::current()->getName() == "expiry_list") active @endif">
+                            <a class="d-block sidebar-link text-decoration-none" href={{route("expiry_list")}}>Expiry
                                 List</a>
                         </li>
-                        <li class="nav-item border-top border-bottom">
-                            <a class="d-block p-3 bg-light text-dark text-decoration-none" href={{route("allUsers")}}>Manage Users</a>
+                        <li class="nav-item sidebar-item @if (Route::current()->getName() == "allUsers") active @endif">
+                            <a class="d-block sidebar-link text-dark text-decoration-none" href={{route("allUsers")}}>Manage Users</a>
                         </li>
                     </ul>
                 </div>
-               @endif
+            @endif
         </nav>
 
         <main class="content mt-4">
