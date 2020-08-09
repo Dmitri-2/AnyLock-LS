@@ -10,6 +10,7 @@ use App\LockerRental;
 use App\User;
 use Illuminate\Http\Request;
 use Route;
+use Auth;
 
 class AdminController extends Controller
 {
@@ -36,7 +37,11 @@ class AdminController extends Controller
     }
 
     public function viewAllLockers(){
-        $rentals = LockerRental::all();
+        $all = LockerRental::all();
+        $rentals = array('pending' => [], 'active' => [], 'checked-out' => [], 'abandoned' => [], 'cancelled' => []);
+        foreach ($all as $rental) {
+            array_push($rentals[$rental->status], $rental);
+        }
         return view("admin.rentals", compact("rentals"));
     }
 
@@ -81,16 +86,19 @@ class AdminController extends Controller
     }
 
     public function cancelLockerRental(Request $request){
+        if (empty($request))
+            return redirect()->back()->with(['alert' => 'danger', 'alertMessage' => 'Error attempting to update the rental status.']);
         $rental = LockerRental::where("id", $request->rental_id)->get()->first();
         $rental->cancelRental();
 
-        return redirect()->back()->with(["alert" => "success", "alertMessage"=>"Locker rental cancelled!"]);
+        return redirect()->back()->with(["alert" => "success", "alertMessage"=>"The locker status has been updated."]);
     }
 
     public function expiry_list() {
-        $expired = AdminService::get_expiry_list('expired');
-        $expiring = AdminService::get_expiry_list('expiring');
-        return view('admin.expiry', compact('expired', 'expiring'));
+        $user = Auth::user();
+        $expired = AdminService::get_rentals_by_status('expired');
+        $expiring = AdminService::get_rentals_by_status('expiring');
+        return view('admin.expiry', compact('expired', 'expiring', 'user'));
     }
 
     public function location_list(){
@@ -140,5 +148,26 @@ class AdminController extends Controller
         }
 
         return redirect()->back()->with(['alert' => 'danger', 'alertMessage' => "The locker status did not update. Please try again."]);
+    }
+
+    public function confirmCheckedOut(request $request){
+        if (empty($request))
+            return redirect()->back()->with(['alert' => 'danger', 'alertMessage' => 'Error attempting to update the rental status.']);
+
+        $rental = LockerRental::where("id", $request->rental_id)->get()->first();
+        $rental->checkOut();
+
+        return redirect()->back()->with(["alert" => "success", "alertMessage"=>"The locker status has been updated."]);
+    }
+
+    public function updateDate(request $request){
+        if (empty($request))
+            return redirect()->back()->with(['alert' => 'danger', 'alertMessage' => 'Error attempting to update the rental status.']);
+
+        $rental = LockerRental::where("id", $request->rental_id)->get()->first();
+        $rental->end_date = $request->end_date;
+        $rental->save();
+
+        return redirect()->back()->with(["alert" => "success", "alertMessage"=>"The rentals end date is now " . $rental->end_date]);
     }
 }
