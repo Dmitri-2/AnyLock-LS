@@ -47,6 +47,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::post('/rentals/pending/confirm', 'AdminController@confirmLockerRental')->name('confirmRental');
     Route::post('/rentals/pending/cancel', 'AdminController@cancelLockerRental')->name('cancelRental');
 
+    Route::get('/locations/overview', 'LocationController@adminLocationPage')->name("adminLocations");
 
     Route::post('/rentals/create/manual', 'AdminController@createRentalManually')->name('adminMakeRental');
     Route::get('/users/all', 'AdminController@viewAllUsers')->name('allUsers');
@@ -54,4 +55,9 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
     Route::post('/rentals/checked/confirm', 'AdminController@confirmCheckedOut')->name('checkedOut');
     Route::post('/rentals/update/date', 'AdminController@updateDate')->name('updateDate');
+
+
+    Route::get('/settings', 'SettingsController@adminSettingsPage')->name("adminSettings");
+    Route::get('/settings/view', 'SettingsController@updateSettingPage')->name("viewSetting");
+    Route::post('/settings/update', 'SettingsController@updateSettingSubmit')->name("updateSetting");
 });

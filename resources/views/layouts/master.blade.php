@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" href="{{ URL::asset('/img/drop-water.jpg') }}" type="image/x-icon"/>
-    <title>{{ config('app.name', 'Water Reuse Directory') }}</title>
+    <title>{{ config('app.name', 'AnyLock Locker System') }}</title>
 
     <!-- Scripts - for any compiled site-wide JS -->
     {{--    <script src="{{ asset('js/app.js') }}" defer></script>--}}
@@ -142,37 +142,41 @@
                 <li class="nav-item @if (Route::current()->getName() == "about") active-top @endif">
                     <a class="nav-link" href="{{route("about")}}">About</a>
                 </li>
+                @auth
+                    <li class="nav-item @if (Route::current()->getName() == "rent") active-top @endif">
+                        <a class="nav-link" href="{{route("rent")}}">Rent a Locker</a>
+                    </li>
 
-                <li class="nav-item @if (Route::current()->getName() == "rent") active-top @endif">
-                    <a class="nav-link" href="{{route("rent")}}">Rent a Locker</a>
-                </li>
+                    <li class="nav-item @if (Route::current()->getName() == "userStatus") active-top @endif">
+                        <a class="nav-link" href="{{route("userStatus")}}">My Lockers</a>
+                    </li>
 
-                <li class="nav-item @if (Route::current()->getName() == "userStatus") active-top @endif">
-                    <a class="nav-link" href="{{route("userStatus")}}">My Lockers</a>
-                </li>
+                    @if(Auth::check() && Auth::user()->is_admin)
 
-                <li>
-                    <h5 class="mt-3">Admin Pages</h5>
-                </li>
+                        <li>
+                            <h5 class="mt-3">Admin Pages</h5>
+                        </li>
 
-                <li class="nav-item @if (Route::current()->getName() == "adminDashboard") active-top @endif">
-                    <a class="nav-link" href="{{route("adminDashboard")}}">Dashboard</a>
-                </li>
-                <li class="nav-item @if (Route::current()->getName() == "allRentals") active-top @endif">
-                    <a class="nav-link" href="{{route("allRentals")}}">All Rentals</a>
-                </li>
-                <li class="nav-item @if (Route::current()->getName() == "pendingRentals") active-top @endif">
-                    <a class="nav-link" href="{{route("pendingRentals")}}">Pending Rentals</a>
-                </li>
-                <li class="nav-item @if (Route::current()->getName() == "lockerIssues") active-top @endif">
-                    <a class="nav-link" href="{{route("lockerIssues")}}">Locker Issues</a>
-                </li>
-                <li class="nav-item @if (Route::current()->getName() == "expiry_list") active-top @endif">
-                    <a class="nav-link" href="{{route("expiry_list")}}">Expry List</a>
-                </li>
-                <li class="nav-item @if (Route::current()->getName() == "allUsers") active-top @endif">
-                    <a class="nav-link" href="{{route("allUsers")}}">All Users</a>
-                </li>
+                        <li class="nav-item @if (Route::current()->getName() == "adminDashboard") active-top @endif">
+                            <a class="nav-link" href="{{route("adminDashboard")}}">Dashboard</a>
+                        </li>
+                        <li class="nav-item @if (Route::current()->getName() == "allRentals") active-top @endif">
+                            <a class="nav-link" href="{{route("allRentals")}}">All Rentals</a>
+                        </li>
+                        <li class="nav-item @if (Route::current()->getName() == "pendingRentals") active-top @endif">
+                            <a class="nav-link" href="{{route("pendingRentals")}}">Pending Rentals</a>
+                        </li>
+                        <li class="nav-item @if (Route::current()->getName() == "lockerIssues") active-top @endif">
+                            <a class="nav-link" href="{{route("lockerIssues")}}">Locker Issues</a>
+                        </li>
+                        <li class="nav-item @if (Route::current()->getName() == "expiry_list") active-top @endif">
+                            <a class="nav-link" href="{{route("expiry_list")}}">Expry List</a>
+                        </li>
+                        <li class="nav-item @if (Route::current()->getName() == "allUsers") active-top @endif">
+                            <a class="nav-link" href="{{route("allUsers")}}">All Users</a>
+                        </li>
+                    @endif
+                @endauth
 
                 @guest
                     <li class="nav-item">
@@ -283,7 +287,6 @@
 
             @if(Auth::check() && Auth::user()->is_admin)
                 <h5 class="text-center mt-4"> Admin Tools </h5>
-                <div class="" id="">
                     <ul class="sidebar-group" >
                         <li class="nav-item sidebar-item @if (Route::current()->getName() == "adminDashboard") active @endif">
                             <a class="d-block sidebar-link text-decoration-none" href={{route('adminDashboard')}}>Dashboard</a>
@@ -294,18 +297,25 @@
                         <li class="nav-item sidebar-item @if (Route::current()->getName() == "pendingRentals") active @endif">
                             <a class="d-block sidebar-link text-decoration-none" href={{route('pendingRentals')}}>Pending Rentals</a>
                         </li>
+                        <li class="nav-item sidebar-item @if (Route::current()->getName() == "expiry_list") active @endif">
+                            <a class="d-block sidebar-link text-decoration-none" href={{route("expiry_list")}}>Expiry List</a>
+                        </li>
+                    </ul>
+
+                    <ul class="sidebar-group" >
                         <li class="nav-item sidebar-item @if (Route::current()->getName() == "lockerIssues") active @endif">
                             <a class="d-block sidebar-link text-decoration-none" href={{route('lockerIssues')}}>Locker Issues</a>
                         </li>
-                        <li class="nav-item sidebar-item @if (Route::current()->getName() == "expiry_list") active @endif">
-                            <a class="d-block sidebar-link text-decoration-none" href={{route("expiry_list")}}>Expiry
-                                List</a>
+                        <li class="nav-item sidebar-item @if (Route::current()->getName() == "adminLocations") active @endif">
+                            <a class="d-block sidebar-link text-dark text-decoration-none" href={{route("adminLocations")}}>Manage Locations</a>
                         </li>
                         <li class="nav-item sidebar-item @if (Route::current()->getName() == "allUsers") active @endif">
                             <a class="d-block sidebar-link text-dark text-decoration-none" href={{route("allUsers")}}>Manage Users</a>
                         </li>
+                        <li class="nav-item sidebar-item @if (Route::current()->getName() == "adminSettings") active @endif">
+                            <a class="d-block sidebar-link text-dark text-decoration-none" href={{route("adminSettings")}}>Settings</a>
+                        </li>
                     </ul>
-                </div>
             @endif
         </nav>
 
