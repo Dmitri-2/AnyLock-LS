@@ -7,7 +7,7 @@
         // Globals
         var curLocation = 0;
         var shapes = [$.parseJSON(<?php echo json_encode($shapes); ?>)];
-        var locations = <?php echo json_encode($locations); ?>;    
+        var locations = <?php echo json_encode($locations); ?>;
 
         $(function(){
 
@@ -19,7 +19,7 @@
                 $('#duration').append("<option>"+plusMonth(i)+"</option>");
             }
 
-    
+
             $("#location").on("change", function(){
 
                 changeLocation($("#location").find("option").index($("#location").find("option:selected")) -1);
@@ -33,7 +33,7 @@
                             lockerCount++;
                         }
                     }
-                });   
+                });
             });
         });
 
@@ -46,7 +46,7 @@
 
             return 0;
         }
-        
+
         function changeLocation(num){
             if (num < shapes.length && num > -1)
                 curLocation = num;
@@ -59,11 +59,6 @@
     </script>
 
     <style type="text/css">
-        .Lockers{
-            width: 90%;
-            height: 300px;
-            border: solid black 1px;
-        }
         .radio-locker{
             display: none;
         }
@@ -71,7 +66,7 @@
         .locker {
           display: inline-block;
           padding: 5px 10px;
-          cursor: pointer; 
+          cursor: pointer;
           height: 25%;
         }
 
@@ -105,31 +100,29 @@
         }
         .locker input:checked+span:after {
           opacity: 1;
-        }  
+        }
     </style>
 
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Locker Rental Page</div>
-
+                    <div class="card-header text-center"><h2>Locker Rental Page<h2/></div>
                     <div class="card-body">
-                        <p>
-                            Select a Locker
+                        <div class="text-center"><h4>Select a Locker</h4></div>
                             <form action="{{ route('tryRent') }}" method="POST">
                                 {{ csrf_field() }}
-                                <div class="form-group col">
+                                <div class="form-group">
                                     <label for="location">Location</label>
                                     <select id="location" name="location" class="form-control">
                                         <option selected disabled>Please Select Location</option>
                                     </select>
                                 </div>
-                                <div class="col form-group">
+                                <div class="form-group">
                                     <div class="Lockers row">
                                     </div>
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group">
                                     <label for="duration">Rental Duration</label>
                                     <select id="duration" name="duration" class="form-control">
                                         <option selected disabled="">Please Select</option>
@@ -137,7 +130,6 @@
                                 </div>
                                 <input type="submit" class="btn btn-primary" value="Submit">
                             </form>
-                        </p>
                     </div>
                 </div>
             </div>
