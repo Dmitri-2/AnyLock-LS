@@ -1,4 +1,9 @@
 Please be sure your pull request follows these rules
-- [ ] The issue/s you are trying to add / fix have not already been addressed
-- [ ] Your code can build and run with php artisan 
-- [ ] Your code adheres to our mission to keep the code base as generic as possible, in order to be open to more people
+- [ ] Provide screenshots/Screenrecordings that demonstrate the feature/change
+- [ ] Follow our coding conventions (below) / Read and match the conventions used in our code.
+- [ ] Keep the feature limited to one commit Keep it clean!
+- [ ] Write a clear commit message includes a detailed description of the changes and the impact on the code.
+- A detailed description of a feature/change:
+- [ ] Use a clear and descriptive title for the suggestion.
+- [ ] Provide a step-by-step description of the suggested feature/change in as many details as possible.
+- [ ] Explain why this feature/change is useful for AnyLock.
