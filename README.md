@@ -12,6 +12,22 @@ This application was developed by the Summer 2020 Open Source team at Portland S
 - [Alexander Wallace](https://github.com/AlexAtPSU)
 - [Paul Hubbard](https://github.com/phubbard67)
 
+## Code Libraries and Resources Used  
+
+- Laravel PHP Framework _(MIT License)_
+- Bootstrap CSS Library _(MIT License)_
+- Google Fonts _(Open Font License)_
+- JQuery _(MIT License)_
+- FontAwesome _([Free License](https://fontawesome.com/license/free))_
+
+**Note:** This project was built using the base installation of the Laravel framework. 
+Most of the code that was written by the project team exists in the following directories: 
+
+- `app/Http/Controllers` and `app/Http/Service` for the PHP code handling the requests 
+- `resources/views`  for the HTML page tempates
+- `routes/web.php` and `routes/api.php`for web routes  
+ 
+
 ## How to Run the Project Locally
 
 To run the project locally, please see the [Laravel installation instructions](https://laravel.com/docs/7.x/installation) to first install Laravel on your machine.
