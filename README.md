@@ -7,10 +7,10 @@ AnyLock Locker Managment System is a web application to track the rental of lock
 
 This application was developed by the Summer 2020 Open Source team at Portland State University, consisting of: 
 
-- Dmitri Murphy 
-- Davis Giang 
-- Alexander Wallace 
-- Paul Hubbard 
+- [Dmitri Murphy](https://github.com/Dmitri-2)
+- [Davis Giang](https://github.com/giangdavis)
+- [Alexander Wallace](https://github.com/AlexAtPSU)
+- [Paul Hubbard](https://github.com/phubbard67)
 
 ## How to Run the Project Locally
 
