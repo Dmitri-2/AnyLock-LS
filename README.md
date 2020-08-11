@@ -2,8 +2,7 @@
 
 ## About This Project
  
-It is a web application to track the rental of lockers. It was created to help people and buisnesses get a free solution 
-to manage their locker systems.  
+AnyLock Locker Managment System is a web application to track the rental of lockers. With this system, you can assign users and administrators to rent, checkout, and manage lockers for many different locker. The program was made to be very generic, so that it can fit in most locker systems. AnyLock was created to help people and buisnesses get a free solution to manage their locker systems. It is free to use and manipulate however you please. 
  
 
 This application was developed by the Summer 2020 Open Source team at Portland State University, consisting of: 
