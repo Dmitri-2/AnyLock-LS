@@ -37,6 +37,12 @@ class LockerRental extends Model
         $this->locker->makeAvailable();
     }
 
+    public function checkOut(){
+        $this->status = "checked-out";
+        $this->save();
+        $this->locker->makeAvailable();
+    }
+
     public function cancelUserRental(){
         $this->locker->makeExpired();
     }

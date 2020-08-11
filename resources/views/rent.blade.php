@@ -6,8 +6,14 @@
     <script type="text/javascript">
         // Globals
         var curLocation = 0;
-        var shapes = [$.parseJSON(<?php echo json_encode($shapes); ?>)];
         var locations = <?php echo json_encode($locations); ?>;
+        var layouts = <?php echo json_encode($shapes); ?>;
+
+        var shapes = [];
+
+        for(var i = 0; i < locations.length; i++){
+            shapes.push($.parseJSON(layouts[i]));
+        }
 
         $(function(){
 
@@ -107,7 +113,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header text-center"><h2>Locker Rental Page<h2/></div>
+                    <div class="card-header text-center"><h2>Locker Rental Page</h2></div>
                     <div class="card-body">
                         <div class="text-center"><h4>Select a Locker</h4></div>
                             <form action="{{ route('tryRent') }}" method="POST">
