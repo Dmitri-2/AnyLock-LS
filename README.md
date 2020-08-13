@@ -22,6 +22,7 @@ This application was developed by the Summer 2020 Open Source team at Portland S
 - Google Fonts _(Open Font License)_
 - JQuery _(MIT License)_
 - FontAwesome _([Free License](https://fontawesome.com/license/free))_
+- Background Locker Photo by moren hsu ([Unsplah License](https://unsplash.com/license)) ([Photo](https://unsplash.com/photos/VLaKsTkmVhk))
 
 **Note:** This project was built using the base installation of the Laravel framework. 
 Most of the code that was written by the project team exists in the following directories: 
