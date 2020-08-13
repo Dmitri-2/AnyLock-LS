@@ -54,6 +54,9 @@
                                                 <div>
                                                     <strong> Locker Number: </strong> {{$rental->locker->locker_num}}
                                                 </div>
+                                                <div>
+                                                    <strong> Location: </strong> {{$rental->locker->location->name}}
+                                                </div>
 
                                                 <div class="my-3 mx-5 text-left">
                                                     <div class="form-check">
@@ -106,6 +109,9 @@
                                                 </div>
                                                 <div>
                                                     <strong> Locker Number: </strong> {{$rental->locker->locker_num}}
+                                                </div>
+                                                <div>
+                                                    <strong> Location: </strong> {{$rental->locker->location->name}}
                                                 </div>
 
                                                 <div class="my-3 mx-5 text-left">
