@@ -26,7 +26,21 @@
                             <td>{{$rental->locker->location->name}}</td>
                             <td>{{$rental->locker->locker_num}}</td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#lockerConfirmModal-{{$rental->locker->id}}"><i class="fas fa-store-alt-slash"></i></button>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#lockerModal-{{$rental->locker->id}}"><i class="fas fa-store-alt-slash"></i></button>
+
+                                <div class="modal fade" id="lockerModal-{{$rental->locker->id}}" role="dialog">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="mx-auto">Locker Clean Out</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <button type="button" data-dismiss="modal" class="btn btn-lg btn-warning" data-toggle="modal" data-target="#lockerCutModal-{{$rental->locker->id}}">Cut the Lock <i class="fas fa-cut"></i></button>
+                                                <button type="button" data-dismiss="modal" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#lockerConfirmModal-{{$rental->locker->id}}">Check Out Locker <i class="fas fa-file-signature"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="modal fade" id="lockerConfirmModal-{{$rental->locker->id}}" role="dialog">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -80,8 +94,59 @@
                                         </div>
                                     </div>
                                 </div>
-                            </td>
-                                </form>
+                                <div class="modal fade" id="lockerCutModal-{{$rental->locker->id}}" role="dialog">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="mx-auto">Confirm Locker Check Out</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div>
+                                                    <strong> User: </strong> {{$rental->user->name}}
+                                                </div>
+                                                <div>
+                                                    <strong> Locker Number: </strong> {{$rental->locker->locker_num}}
+                                                </div>
+
+                                                <div class="my-3 mx-5 text-left">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox"
+                                                               name="locker-check-identity-{{$rental->locker->id}}"
+                                                               id="locker-check-identity-{{$rental->locker->id}}"
+                                                               onclick="userAcknowledged({{$rental->locker->id}})">
+                                                        <label class="form-check-label" for="locker-check-identity-{{$rental->locker->id}}">
+                                                            We have attempted to contact the user.
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox"
+                                                               name="locker-check-into-{{$rental->locker->id}}"
+                                                               id="locker-check-into-{{$rental->locker->id}}"
+                                                               onclick="userAcknowledged({{$rental->locker->id}})">
+                                                        <label class="form-check-label" for="locker-check-into-{{$rental->locker->id}}">
+                                                            I have checked that the locker is ready to be checked out.
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <h5 class="text-danger mt-2"> Please check the two boxes to confirm.</h5>
+
+                                                <div class="row mt-5">
+                                                    <div class="col-md-6">
+                                                        <button class="btn btn-danger btn-block" data-dismiss="modal">Cancel</button>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <form method="POST" action="{{route("cutLock")}}">
+                                                            @csrf
+                                                            <input name="rental_id" value="{{$rental->id}}" hidden>
+                                                            <button class="btn btn-warning btn-block" id="locker-check-in-btn-{{$rental->locker->id}}" disabled>Cut the Lock <i class="fas fa-cut"></i></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

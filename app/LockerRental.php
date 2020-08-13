@@ -43,6 +43,12 @@ class LockerRental extends Model
         $this->locker->makeAvailable();
     }
 
+    public function abandon(){
+        $this->status = "abandoned";
+        $this->save();
+        $this->locker->makeAvailable();
+    }
+
     public function cancelUserRental(){
         $this->locker->makeExpired();
     }

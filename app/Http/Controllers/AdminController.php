@@ -160,6 +160,16 @@ class AdminController extends Controller
         return redirect()->back()->with(["alert" => "success", "alertMessage"=>"The locker status has been updated."]);
     }
 
+    public function cutLock(request $request){
+        if (empty($request))
+            return redirect()->back()->with(['alert' => 'danger', 'alertMessage' => 'Error attempting to update the rental status.']);
+
+        $rental = LockerRental::where("id", $request->rental_id)->get()->first();
+        $rental->abandon();
+
+        return redirect()->back()->with(["alert" => "success", "alertMessage"=>"The locker status has been updated."]);
+    }
+
     public function updateDate(request $request){
         if (empty($request))
             return redirect()->back()->with(['alert' => 'danger', 'alertMessage' => 'Error attempting to update the rental status.']);
