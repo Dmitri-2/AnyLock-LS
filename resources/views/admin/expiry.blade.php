@@ -1,13 +1,6 @@
 @extends("layouts.master")
 @section('body')
 
-<?php 
-    $array = array(
-        "Expiry" => array("Expiry List", $expired, "The following lockers are expired, and the locks should be cut"),
-        "Expiring" => array("Expiring List", $expiring, "The following lockers will soon be expired")
-    );
- ?>
-
     <div class="container-fluid">
         @foreach($array as $type => $info)
         <div class="row text-center">

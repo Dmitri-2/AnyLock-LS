@@ -98,7 +98,12 @@ class AdminController extends Controller
         $user = Auth::user();
         $expired = AdminService::get_rentals_by_status('expired');
         $expiring = AdminService::get_rentals_by_status('expiring');
-        return view('admin.expiry', compact('expired', 'expiring', 'user'));
+
+        $array = array(
+            "Expiry" => array("Expiry List", $expired, "The following lockers are expired, and the locks should be cut"),
+            "Expiring" => array("Expiring List", $expiring, "The following lockers will soon be expired")
+        );
+        return view('admin.expiry', compact('expired', 'expiring', 'array', 'user'));
     }
 
     public function location_list(){
