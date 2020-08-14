@@ -91,6 +91,10 @@ To confirm a locker rental, a user must come in person to a user with administra
 physically check the user into their locker (by removing the default lock and allowing the user to put their own lock on). 
 The administrator should find the user in the Pending Rentals page, and follow onscreen instructions to confirm their rental.  
 
+## Tests 
+
+https://laravel.com/docs/7.x/testing
+To add more tests, Follow the documentation and create the test in feature or unit directory (depending on what the tests is for)
 
 ## The following two sections are taken from the Laravel Readme file: 
 
