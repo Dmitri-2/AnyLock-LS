@@ -33,8 +33,8 @@
                             @if($current->status != 'expired')
                             <form method="POST" action="{{route("cancelUserRental")}}">
                                 @csrf
-                                <input name="rental_id" value="{{$current->locker->id}}" hidden>
-                                <button type="submit" class="btn btn-block btn-sm btn-danger">Cancel</button>
+                                <input name="rental_id" value="{{$current->id}}" hidden>
+                                <button type="submit" class="btn btn-block btn-sm btn-danger">Cancel Rental</button>
                             </form>
                                 @endif
                         </td>
