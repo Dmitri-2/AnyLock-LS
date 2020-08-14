@@ -77,6 +77,12 @@
                                             <input type="hidden" name="rental_id" value="{{$rental->id}}">
                                             <input type="submit" class="btn btn-warning btn-block font-weight-bold" value="Cancel Rental">
                                         </form>
+                                        <br>
+                                        <form action="{{route('cutLock')}}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="rental_id" value="{{$rental->id}}">
+                                            <input type="submit" class="btn btn-warning btn-block font-weight-bold" value="Cut Lock">
+                                        </form>
                                         <hr>
                                         <form action="{{route('updateDate')}}" method="POST" >
                                             @csrf

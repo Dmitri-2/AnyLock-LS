@@ -99,7 +99,12 @@ class AdminController extends Controller
         $user = Auth::user();
         $expired = AdminService::get_rentals_by_status('expired');
         $expiring = AdminService::get_rentals_by_status('expiring');
-        return view('admin.expiry', compact('expired', 'expiring', 'user'));
+
+        $array = array(
+            "Expiry" => array("Expiry List", $expired, "The following lockers are expired, and the locks should be cut"),
+            "Expiring" => array("Expiring List", $expiring, "The following lockers will soon be expired")
+        );
+        return view('admin.expiry', compact('expired', 'expiring', 'array', 'user'));
     }
 
     public function location_list(){
@@ -157,6 +162,16 @@ class AdminController extends Controller
 
         $rental = LockerRental::where("id", $request->rental_id)->get()->first();
         $rental->checkOut();
+
+        return redirect()->back()->with(["alert" => "success", "alertMessage"=>"The locker status has been updated."]);
+    }
+
+    public function cutLock(request $request){
+        if (empty($request))
+            return redirect()->back()->with(['alert' => 'danger', 'alertMessage' => 'Error attempting to update the rental status.']);
+
+        $rental = LockerRental::where("id", $request->rental_id)->get()->first();
+        $rental->abandon();
 
         return redirect()->back()->with(["alert" => "success", "alertMessage"=>"The locker status has been updated."]);
     }
