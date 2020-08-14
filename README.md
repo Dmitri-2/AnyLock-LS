@@ -19,7 +19,7 @@ This application was developed by the Summer 2020 Open Source team at Portland S
 
 A hosted version of the project can be accessed at: https://www.anylock.dev/
 
-A demo of the system by the project team is available on YouTube. 
+A demo of the system by the project team is available on YouTube: https://youtu.be/EWBP1J4dpsM  
 
 [![YouTube Demo Link](https://img.youtube.com/vi/EWBP1J4dpsM/0.jpg)](https://youtu.be/EWBP1J4dpsM)
 
