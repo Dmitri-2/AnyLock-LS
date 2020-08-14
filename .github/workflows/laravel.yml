@@ -11,9 +11,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v2
-
     services:
       postgres:
         image: postgres:11
@@ -24,7 +21,9 @@ jobs:
         ports:
           - 5432:5432
 
-    
+    steps:
+    - uses: actions/checkout@v2
+
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.test', '.env');"
     - name: Install Dependencies
