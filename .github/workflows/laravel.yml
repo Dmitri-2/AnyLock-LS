@@ -14,6 +14,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    services:
+      postgres:
+        image: postgres:11
+        env:
+          POSTGRES_USER: pg_user
+          POSTGRES_PASSWORD: pg_user
+          POSTGRES_DB: pg_user_unit_test_pass
+        ports:
+          - 5432:5432
+
     
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.test', '.env');"
