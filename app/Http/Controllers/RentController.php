@@ -42,7 +42,7 @@ class RentController extends Controller
                 return redirect()->route('userStatus')->with(['alert' => 'success', 'alertMessage' => 'Locker #' . $request->id . ' at ' . $request->location . ' has been reserved, with a end date of: ' . $request->duration]);
             }
         }
-        return redirect()->route('rent')->with(['alert' => 'danger', 'alertMessage' => 'Locker id#' . $request->id . ' at: ' . $request->location . ' was not availble. Please try again or try a different locker.']);
+        return redirect()->route('rent')->with(['alert' => 'danger', 'alertMessage' => 'Locker id#' . $request->id . ' at: ' . $request->location . ' was not available. Please try again or try a different locker.']);
     }
 
     public function getLocationsLockers (Request $request){

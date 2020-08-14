@@ -34,7 +34,7 @@
                             <form method="POST" action="{{route("cancelUserRental")}}">
                                 @csrf
                                 <input name="rental_id" value="{{$current->id}}" hidden>
-                                <button type="submit" class="btn btn-block btn-sm btn-danger">Cancel Rental</button>
+                                <button type="submit" class="btn btn-block btn-sm btn-danger">Cancel</button>
                             </form>
                                 @endif
                         </td>
