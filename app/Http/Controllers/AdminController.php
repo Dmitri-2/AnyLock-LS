@@ -19,8 +19,9 @@ class AdminController extends Controller
         $lockerRentalCount = LockerRental::count();
         $users = User::all();
         $lockers = Locker::getAllAvailable();
+        $recentRentals = LockerRental::orderBy('updated_at', 'desc')->limit(5)->get();
 
-        return view("admin.dashboard", compact('lockerRentalCount', 'lockers', 'users'));
+        return view("admin.dashboard", compact('lockerRentalCount', 'lockers', 'users', 'recentRentals'));
     }
 
     public function viewAllUsers(){

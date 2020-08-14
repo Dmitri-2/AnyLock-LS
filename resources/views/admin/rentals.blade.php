@@ -7,9 +7,9 @@
             <div class="col-md-10">
                 <h2 class="my-3 text-center">All Rentals</h2>
                 @foreach($rentals as $status => $statusrentals)
-                <table class="table table-striped">
+                    <h2>{{ucfirst($status)}}</h2>
+                    <table class="table table-striped">
                     <thead>
-                        <h2>{{ucfirst($status)}}</h2>
                     <tr>
                         <th scope="col" class="text-center">Locker Id #</th>
                         <th scope="col" class="text-center">Locker Location</th>
