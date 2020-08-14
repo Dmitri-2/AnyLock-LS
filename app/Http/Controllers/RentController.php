@@ -38,6 +38,7 @@ class RentController extends Controller
                 $locker->save();
 
                 $rental->save();
+
                 return redirect()->route('userStatus')->with(['alert' => 'success', 'alertMessage' => 'Locker #' . $request->id . ' at ' . $request->location . ' has been reserved, with a end date of: ' . $request->duration]);
             }
         }
