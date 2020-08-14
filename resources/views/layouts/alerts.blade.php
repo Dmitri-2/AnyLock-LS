@@ -1,3 +1,4 @@
+{{-- Code from the Water Reuse Application (see README)--}}
 @if (session('alert'))
     <div class="w-75 mx-auto">
         <div class="alert alert-{{ session('alert') }}">

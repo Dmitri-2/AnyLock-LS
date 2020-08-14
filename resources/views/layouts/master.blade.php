@@ -1,13 +1,12 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    {{-- The general layout and some HTML elements of this file were created by the Laravel build and/or
+         taken from the Water Reuse Application (see README) --}}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{{ config('app.name', 'AnyLock Locker System') }}</title>
-
-    <!-- Scripts - for any compiled site-wide JS -->
-    {{--    <script src="{{ asset('js/app.js') }}" defer></script>--}}
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -15,9 +14,6 @@
 
     <!-- Font Awesome -->
     <script src="{{URL::asset('/libraries/fontawesome.js')}}"></script>
-
-    <!-- Styles -->
-    {{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
     @stack("css")
 
     {{--Bootstrap--}}
