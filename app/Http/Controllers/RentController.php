@@ -38,7 +38,7 @@ class RentController extends Controller
                 $locker->save();
 
                 $rental->save();
-                return redirect()->route('home')->with(['alert' => 'success', 'alertMessage' => 'Locker id#' . $request->id . ' at: ' . $request->location . ' has been reserved for ' . $request->duration . ' term(s).']);
+                return redirect()->route('home')->with(['alert' => 'success', 'alertMessage' => 'Locker id#' . $request->id . ' at: ' . $request->location . ' has been reserved until ' . $request->duration]);
             }
         }
         return redirect()->route('rent')->with(['alert' => 'danger', 'alertMessage' => 'Locker id#' . $request->id . ' at: ' . $request->location . ' was not availble. Please try again or try a different locker.']);
