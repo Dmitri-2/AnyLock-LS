@@ -48,6 +48,8 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::post('/rentals/pending/cancel', 'AdminController@cancelLockerRental')->name('cancelRental');
 
     Route::get('/locations/overview', 'LocationController@adminLocationPage')->name("adminLocations");
+    Route::post('/locations/create', 'LocationController@createLocation')->name("createLocation");
+    Route::post('/locations/delete', 'LocationController@deleteLocation')->name("deleteLocation");
 
     Route::post('/rentals/create/manual', 'AdminController@createRentalManually')->name('adminMakeRental');
     Route::get('/users/all', 'AdminController@viewAllUsers')->name('allUsers');

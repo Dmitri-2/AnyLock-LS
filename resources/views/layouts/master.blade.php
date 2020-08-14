@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon" href="{{ URL::asset('/img/drop-water.jpg') }}" type="image/x-icon"/>
     <title>{{ config('app.name', 'AnyLock Locker System') }}</title>
 
     <!-- Scripts - for any compiled site-wide JS -->
