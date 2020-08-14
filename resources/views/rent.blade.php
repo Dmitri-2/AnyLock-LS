@@ -29,7 +29,7 @@
                     for (var i = 0; i < shapes[curLocation].length; i++) {
                         $(".Lockers").append("<div id='locker-col" + i + "' class='col'></div>");
                         for (var j = 0; j < shapes[curLocation][i].length && lockerCount < data.length; j++) {
-                            $("#locker-col" + i).append("<label class='locker'><input type='radio' name='id' class='radio-locker' value='" + data[lockerCount]["id"] + "'><span>" + data[lockerCount]["locker_num"] + ": " + data[lockerCount]["status"] + "</span></label><br>");
+                            $("#locker-col" + i).append("<label class='locker d-block text-center'><input type='radio' name='id' class='radio-locker' value='" + data[lockerCount]["id"] + "'><span>" + data[lockerCount]["locker_num"] + ": " + data[lockerCount]["status"] + "</span></label><br>");
                             lockerCount++;
                         }
                     }
@@ -104,23 +104,25 @@
                 <div class="text-center"><h4>Select a Locker</h4></div>
                 <form action="{{ route('tryRent') }}" method="POST">
                     {{ csrf_field() }}
-                    <div class="form-group">
+                    <div class="form-group col-md-4 mx-auto mb-4">
                         <label for="location">Location</label>
                         <select id="location" name="location" class="form-control">
                             <option selected disabled>Please Select Location</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                            <div class="Lockers row">
+                    <div class="form-group col-md-12 mx-auto">
+                            <div class="Lockers row mx-auto col-md-12 d-flex justify-content-center">
                             </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-4 mx-auto mt-4">
                         <label for="duration">Duration</label>
                         <div class="input-group mb-3">
                           <input class="form-control" type="date" name="duration" id="duration" required>
                         </div>
                     </div>
-                    <input type="submit" class="btn btn-primary" value="Submit">
+                    <div class="col-md-4 mx-auto">
+                        <input type="submit" class="btn btn-primary btn-block" value="Submit">
+                    </div>
                 </form>
             </div>
         </div>

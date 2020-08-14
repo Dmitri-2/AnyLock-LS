@@ -36,11 +36,11 @@
                             <td class="text-center">{{$rental->end_date()}}</td>
                             <td class="text-center">
                                 <input type="hidden" name="rental_id" value="{{$rental->id}}">
-                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
+                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#rentalModal-{{$rental->id}}">
                                   <i class="fas fa-cog"></i>
                                 </button>
 
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="rentalModal-{{$rental->id}}" tabindex="-1" role="dialog" aria-labelledby="rentalModal-{{$rental->id}}" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                       <div class="modal-header">
