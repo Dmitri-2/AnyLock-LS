@@ -11,16 +11,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres:11
-        env:
-          POSTGRES_USER: pg_user
-          POSTGRES_PASSWORD: pg_user
-          POSTGRES_DB: pg_user_unit_test_pass
-        ports:
-          - 5432:5432
-
     steps:
     - uses: actions/checkout@v2
 
@@ -35,7 +25,7 @@ jobs:
     - name: Create Database
       run: |
         mkdir -p database
-        touch database/database.pgsql
+        touch database/database.sqlite
         php artisan migrate
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
